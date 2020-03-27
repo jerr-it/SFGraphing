@@ -6,12 +6,14 @@ The file main.cpp provides an example of how to use this library
 
 Create your data  
 ```c++
-    std::vector<double> data1 = {0, 50, 25, 17.5, 9, 4, 2, 1, 1, 1, 1};
-    DataSet set1(data1, sf::Color::Red);
+std::vector<double> data1 = {0, 50, 25, 17.5, 9, 4, 2, 1, 1, 1, 1};
+DataSet set1(data1, sf::Color::Red);
 ```  
 Create a SFPlot and plot your data  
-`SFPlot plotter(xax, "X Axo", "Y Axo", 50, &font);`  
-`plotter.plot(set1);`  
+```c++
+SFPlot plotter(xax, "X Axo", "Y Axo", 50, &font);
+plotter.plot(set1);
+```  
 Call setup, window is a sf::RenderWindow  
 `plotter.setup(&window, PlotType::Line);`  
 Then in your window loop  
