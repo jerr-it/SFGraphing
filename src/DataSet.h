@@ -8,13 +8,15 @@
 #include <vector>
 #include <SFML/Graphics/Color.hpp>
 
+namespace csrc {
 class DataSet {
 public:
     std::vector <double> data;
     sf::Color color;
 
     DataSet(std::vector<double> _data, sf::Color _color);
-};
+    };
+}
 
 
 #endif //SFPLOT_DATASET_H
