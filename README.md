@@ -1,3 +1,6 @@
+![CPP](https://img.shields.io/badge/Language-C++-blue?style=for-the-badge&logo=c%2B%2B)
+![SFMLRequired](https://img.shields.io/badge/SFML-Required-red?style=for-the-badge&logo=sfml)
+
 # SFPlot
 A C++ Plot Library to be used in combination with SFML
 
@@ -15,12 +18,14 @@ SFPlot plotter(xax, "X Axo", "Y Axo", 50, &font);
 plotter.plot(set1);
 ```  
 Call setup, window is a sf::RenderWindow  
-`plotter.setup(&window, PlotType::Line);`  
-Then in your window loop  
 ```
-    window.clear();
-    plotter.RenderTo(&window);
-    window.display();
+plotter.setup(&window, PlotType::Line);
+```  
+In your window loop:  
+```
+window.clear();
+plotter.RenderTo(&window);
+window.display();
 ```
 ## Example Plots
 ![Plot](img/graph1.png)
