@@ -201,6 +201,24 @@ void SFPlot::RenderTo(sf::RenderWindow *window)
 {
     //Final draw calls
 
+    //Draw Legend
+    sf::Vector2f location = sf::Vector2f(window->getSize().x, 0);
+    for(int i = 0; i < DataSets.size(); i++)
+    {
+        sf::Text label;
+        label.setFont(*font);
+        label.setString(DataSets.at(i).label);
+        label.setCharacterSize(margin * 0.35);
+        label.setFillColor(DataSets.at(i).color);
+        label.setPosition(location);
+
+        sf::FloatRect fr = label.getGlobalBounds();
+        label.move(-fr.width, 0);
+        location.x -= fr.width + 5;
+
+        window->draw(label);
+    }
+
     for(int i = 0; i < xnumLabelArray.size(); i++){
         window->draw(xnumLabelArray.at(i));
     }

@@ -4,9 +4,8 @@
 
 #include "DataSet.h"
 
-using namespace csrc;
-
-DataSet::DataSet(std::vector<double> _data, sf::Color _color){
-        data = _data;
-        color = _color;
+DataSet::DataSet(std::vector<double> _data, sf::Color _color, std::string lbl){
+    data = _data;
+    color = _color;
+    label = lbl;
 }

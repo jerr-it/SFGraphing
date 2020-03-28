@@ -10,7 +10,7 @@ The file main.cpp provides an example of how to use this library
 Create your data  
 ```c++
 std::vector<double> data1 = {0, 50, 25, 17.5, 9, 4, 2, 1, 1, 1, 1};
-DataSet set1(data1, sf::Color::Red);
+DataSet set1(data1, sf::Color::Red, "Data1");
 ```  
 Create a SFPlot and plot your data  
 ```c++

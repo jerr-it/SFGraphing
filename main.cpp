@@ -12,10 +12,10 @@ int main() {
         std::vector<double> xax = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
 
         std::vector<double> data1 = {0, 50, 25, 17.5, 9, 4, 2, 1, 1, 1, 1};
-        DataSet set1(data1, sf::Color::Red);
+        DataSet set1(data1, sf::Color::Red, "Data1");
 
         std::vector<double> data2 = {34, 56, 12, 46, 77, 41, 4, 6, 54, 10, 11};
-        DataSet set2(data2, sf::Color::Green);
+        DataSet set2(data2, sf::Color::Green, "Data2");
 
         SFPlot plotter(xax, "X Axo", "Y Axo", 50, &font);
         plotter.plot(set1);
