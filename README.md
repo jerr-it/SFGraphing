@@ -17,12 +17,16 @@ Create a SFPlot and plot your data
 SFPlot plotter(xax, "X Axo", "Y Axo", 50, &font);
 plotter.plot(set1);
 ```  
-Call setup, window is a sf::RenderWindow  
+In case you want to limit the plots size, instead of it fillin the window use:
+```c++
+plotter.overrideWindowSize(400,400);
 ```
+Call setup, window is a sf::RenderWindow  
+```c++
 plotter.setup(&window, PlotType::Line);
 ```  
 In your window loop:  
-```
+```c++
 window.clear();
 plotter.RenderTo(&window);
 window.display();

@@ -54,6 +54,7 @@ namespace csrc {
         int yStepSize;
 
         sf::Vector2u windowDim;
+        bool windowDimOverriden;
 
         sf::VertexArray xAxisArray;
         sf::VertexArray yAxisArray;
@@ -77,9 +78,15 @@ namespace csrc {
 
         void setup(sf::RenderWindow *window, PlotType type);
 
+        void setxAxis(std::vector<double> axis);
+
         void setFont(sf::Font *font);
 
         void setMargin(double margin);
+
+        void clearDatasets();
+
+        void overrideWindowSize(int x, int y);
 
         void plot(DataSet set);
 

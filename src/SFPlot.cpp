@@ -12,6 +12,7 @@ SFPlot::SFPlot(std::vector<double> x, std::string xl, std::string yl, double m, 
     yLabel = yl;
     margin = m;
     font = f;
+    windowDimOverriden = false;
 }
 
 std::string SFPlot::ToString(double d, int precision) {
@@ -19,6 +20,10 @@ std::string SFPlot::ToString(double d, int precision) {
     stream << std::fixed << std::setprecision(precision) << d;
     std::string s = stream.str();
     return s;
+}
+
+void SFPlot::setxAxis(std::vector<double> axis) {
+    xAxis = axis;
 }
 
 void SFPlot::setFont(sf::Font *f) {
@@ -41,6 +46,12 @@ void SFPlot::setLabels(std::string x, std::string y) {
     yLabel = y;
 }
 
+void SFPlot::overrideWindowSize(int x, int y) {
+    windowDim.x = x;
+    windowDim.y = y;
+    windowDimOverriden = true;
+}
+
 sf::Vector2f SFPlot::CoordToWindowLocation(double x, double y, sf::RenderWindow* window) {
     sf::Vector2f vec;
 
@@ -50,13 +61,25 @@ sf::Vector2f SFPlot::CoordToWindowLocation(double x, double y, sf::RenderWindow*
     return vec;
 }
 
+void SFPlot::clearDatasets() {
+    DataSets.clear();
+    xAxisArray.clear();
+    yAxisArray.clear();
+    xnumArray.clear();
+    ynumArray.clear();
+    xnumLabelArray.clear();
+    ynumLabelArray.clear();
+
+    for(int i = 0; i < datasetsPlotPoints.size(); i++){
+        datasetsPlotPoints.at(i).clear();
+    }
+}
+
 void SFPlot::setup(sf::RenderWindow* window, PlotType type) {
     //Set up variables
     xMax = *std::max_element(xAxis.begin(), xAxis.end());
     xMin = *std::min_element(xAxis.begin(), xAxis.end());
 
-    //yMax = *std::max_element(yAxis.begin(), yAxis.end());
-    //yMin = *std::min_element(yAxis.begin(), yAxis.end());
 
     yMax = -INFINITY;
     yMin = INFINITY;
@@ -72,7 +95,9 @@ void SFPlot::setup(sf::RenderWindow* window, PlotType type) {
         }
     }
 
-    windowDim = window->getSize();
+    if(!windowDimOverriden) {
+        windowDim = window->getSize();
+    }
     xAxisLen = windowDim.x - 2 * margin;
     yAxisLen = windowDim.y - 2 * margin;
 
@@ -182,6 +207,7 @@ void SFPlot::setup(sf::RenderWindow* window, PlotType type) {
         } else if (type == PlotType::Line) {
             plotPoints.setPrimitiveType(sf::PrimitiveType::LineStrip);
             plotPoints.resize(xAxis.size());
+
             for (int i = 0; i < xAxis.size(); i++) {
                 sf::Vector2f pos = CoordToWindowLocation(xAxis.at(i), DataSets.at(di).data.at(i), window);
                 plotPoints[i].position = pos;
@@ -202,7 +228,7 @@ void SFPlot::RenderTo(sf::RenderWindow *window)
     //Final draw calls
 
     //Draw Legend
-    sf::Vector2f location = sf::Vector2f(window->getSize().x, 0);
+    sf::Vector2f location = sf::Vector2f(windowDim.x, 0);
     for(int i = 0; i < DataSets.size(); i++)
     {
         sf::Text label;
