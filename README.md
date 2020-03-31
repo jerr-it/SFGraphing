@@ -12,12 +12,12 @@ Create your data
 std::vector<double> data1 = {0, 50, 25, 17.5, 9, 4, 2, 1, 1, 1, 1};
 DataSet set1(data1, sf::Color::Red, "Data1");
 ```  
-Create a SFPlot and plot your data  
+Create a SFPlot and plot your data, font is a sf::Font  
 ```c++
-SFPlot plotter(xax, "X Axo", "Y Axo", 50, &font);
+SFPlot plotter(xax, "X Axis Label", "Y Axis Label", 50, &font);
 plotter.plot(set1);
 ```  
-In case you want to limit the plots size, instead of it fillin the window use:
+In case you want to limit the plots size, instead of it filling the window use:
 ```c++
 plotter.overrideWindowSize(400,400);
 ```
