@@ -1,16 +1,21 @@
-<div style="text-align:center"><h1>SFPlot</h1></div>
+<h1 align="center">SFPlot</h1>
 
-<div style="text-align:center">
+<p align="center">
 <img src="https://img.shields.io/badge/Language-C++-blue?style=for-the-badge&logo=c%2B%2Bl" />
 <img src="https://img.shields.io/badge/SFML-Required-red?style=for-the-badge&logo=sfml" />
-</div>
+</p>
 
-<br>
-<div style="text-align:center">
+<p align="center">
 A C++ Plot Library to be used in combination with SFML
+</p>
+
+<p align="center">
+    <img src="img/graph1.png" width=400/>
+    <img src="img/graph2.png" width=400/>
 </div>
 
-# How to use
+<h2 align="center">How to use</h2>
+
 The file main.cpp provides an example of how to use this library
 
 Create your data  
@@ -37,8 +42,3 @@ window.clear();
 plotter.RenderTo(&window);
 window.display();
 ```
-## Example Plots
-<div style="text-align:center">
-<img src="img/graph1.png" />
-<img src="img/graph2.png" />
-</div>
