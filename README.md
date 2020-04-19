@@ -1,8 +1,14 @@
-![CPP](https://img.shields.io/badge/Language-C++-blue?style=for-the-badge&logo=c%2B%2B)
-![SFMLRequired](https://img.shields.io/badge/SFML-Required-red?style=for-the-badge&logo=sfml)
+<div style="text-align:center"><h1>SFPlot</h1></div>
 
-# SFPlot
+<div style="text-align:center">
+<img src="https://img.shields.io/badge/Language-C++-blue?style=for-the-badge&logo=c%2B%2Bl" />
+<img src="https://img.shields.io/badge/SFML-Required-red?style=for-the-badge&logo=sfml" />
+</div>
+
+<br>
+<div style="text-align:center">
 A C++ Plot Library to be used in combination with SFML
+</div>
 
 # How to use
 The file main.cpp provides an example of how to use this library
@@ -32,5 +38,7 @@ plotter.RenderTo(&window);
 window.display();
 ```
 ## Example Plots
-![Plot](img/graph1.png)
-![Plot](img/graph2.png)
+<div style="text-align:center">
+<img src="img/graph1.png" />
+<img src="img/graph2.png" />
+</div>
