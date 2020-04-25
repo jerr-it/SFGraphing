@@ -132,6 +132,12 @@ void SFPlot::setup(sf::RenderWindow* window, PlotType type) {
     //Increase between markers
     xStepSize = 2 * round(sqrt((xHigh - xLow)));
 
+    int xsteps = (xHigh - xLow) / xStepSize;
+    while(xsteps > 10){
+        xStepSize *= 2;
+        xsteps = (xHigh - xLow) / xStepSize;
+    }
+
     xnumArray.setPrimitiveType(sf::PrimitiveType::Lines);
     xnumArray.resize(xAxis.size() * 2);
     for (int xlabel = xLow; xlabel <= xHigh; xlabel += xStepSize) {
@@ -159,6 +165,12 @@ void SFPlot::setup(sf::RenderWindow* window, PlotType type) {
     yLow = round(yMin);
     yHigh = round(yMax);
     yStepSize = 2 * round(sqrt((yHigh - yLow)));
+
+    int ysteps = (yHigh - yLow) / yStepSize;
+    while(ysteps > 10){
+        yStepSize *= 2;
+        ysteps = (yHigh - yLow) / yStepSize;
+    }
 
     ynumArray.setPrimitiveType(sf::PrimitiveType::Lines);
     ynumArray.resize((yHigh - yLow) * 2);
