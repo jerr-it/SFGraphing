@@ -78,6 +78,8 @@ namespace csrc {
 
         void setup(sf::RenderWindow *window, PlotType type);
 
+        double distSq(sf::Vector2f a, sf::Vector2f b);
+
         void setxAxis(std::vector<double> axis);
 
         void setFont(sf::Font *font);
@@ -94,7 +96,7 @@ namespace csrc {
 
         std::string ToString(double d, int precision);
 
-        void RenderTo(sf::RenderWindow *window);
+        void RenderTo(sf::RenderWindow* window);
     };
 }
 

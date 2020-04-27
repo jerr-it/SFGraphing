@@ -10,8 +10,9 @@ A C++ Plot Library to be used in combination with SFML
 </p>
 
 <p align="center">
-    <img src="img/graph1.png" width=400/>
-    <img src="img/graph2.png" width=400/>
+    <img src="img/points.png" width=400/>
+    <img src="img/lines.png" width=400/>
+    <img src="img/bars.png" width=400/>
 </div>
 
 <h2 align="center">How to use</h2>
@@ -20,6 +21,8 @@ The file main.cpp provides an example of how to use this library
 
 Create your data  
 ```c++
+//data arrays need to have the same length as the x axis array
+std::vector<double> xAxis = {10, 20, 30, 40, 50, 60, 70, 80, 90};
 std::vector<double> data1 = {0, 50, 25, 17.5, 9, 4, 2, 1, 1, 1, 1};
 DataSet set1(data1, sf::Color::Red, "Data1");
 ```  

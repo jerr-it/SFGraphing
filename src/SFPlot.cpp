@@ -201,7 +201,7 @@ void SFPlot::setup(sf::RenderWindow* window, PlotType type) {
             plotPoints.setPrimitiveType(sf::PrimitiveType::Quads);
             plotPoints.resize(xAxis.size() * 4);
 
-            int vertexIndex = 0;
+            vertexIndex = 0;
             for (int i = 0; i < xAxis.size(); i++) {
                 sf::Vector2f pos = CoordToWindowLocation(xAxis.at(i), DataSets.at(di).data.at(i), window);
                 plotPoints[vertexIndex+0].position = sf::Vector2f(pos.x - 3, pos.y - 3);
@@ -226,16 +226,41 @@ void SFPlot::setup(sf::RenderWindow* window, PlotType type) {
                 plotPoints[i].color = DataSets.at(di).color;
             }
         } else if (type == PlotType::Bars) {
+            plotPoints.setPrimitiveType(sf::PrimitiveType::Quads);
+            plotPoints.resize(xAxis.size() * 4);
 
+            float barWidth = ((float)xAxisLen / ((float)xsteps * 3 * DataSets.size())) - 5;
+
+            vertexIndex = 0;
+            for(int i = 0; i < xAxis.size(); i++){
+                sf::Vector2f pos = CoordToWindowLocation(xAxis.at(i), DataSets.at(di).data.at(i), window);
+                sf::Vector2f groundPos = CoordToWindowLocation(xAxis.at(i), 0, window);
+
+                plotPoints[vertexIndex+0].position = sf::Vector2f(pos.x - barWidth / 2 - di * barWidth + ((float)DataSets.size() / 2) * (barWidth / 2), pos.y);
+                plotPoints[vertexIndex+1].position = sf::Vector2f(pos.x + barWidth / 2 - di * barWidth + ((float)DataSets.size() / 2) * (barWidth / 2), pos.y);
+                plotPoints[vertexIndex+2].position = sf::Vector2f(groundPos.x + barWidth / 2 - di * barWidth +  + ((float)DataSets.size() / 2) * (barWidth / 2), groundPos.y);
+                plotPoints[vertexIndex+3].position = sf::Vector2f(groundPos.x - barWidth / 2 - di * barWidth +  + ((float)DataSets.size() / 2) * (barWidth / 2), groundPos.y);
+
+                plotPoints[vertexIndex+0].color = DataSets.at(di).color;
+                plotPoints[vertexIndex+1].color = DataSets.at(di).color;
+                plotPoints[vertexIndex+2].color = DataSets.at(di).color;
+                plotPoints[vertexIndex+3].color = DataSets.at(di).color;
+
+                vertexIndex += 4;
+            }
         } else {
-
+            std::cout << "No valid Plottype given." << std::endl;
         }
 
         datasetsPlotPoints.push_back(plotPoints);
     }
 }
 
-void SFPlot::RenderTo(sf::RenderWindow *window)
+double SFPlot::distSq(sf::Vector2f a, sf::Vector2f b){
+    return ((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+}
+
+void SFPlot::RenderTo(sf::RenderWindow* window)
 {
     //Final draw calls
 
@@ -257,24 +282,81 @@ void SFPlot::RenderTo(sf::RenderWindow *window)
         window->draw(label);
     }
 
-    for(int i = 0; i < xnumLabelArray.size(); i++){
-        window->draw(xnumLabelArray.at(i));
-    }
-
-    for(int i = 0; i < ynumLabelArray.size(); i++){
-        window->draw(ynumLabelArray.at(i));
-    }
-
+    //Draw data
     for(int i = 0; i < datasetsPlotPoints.size(); i++){
         window->draw(datasetsPlotPoints.at(i));
     }
 
+    //Draw x label numbers
+    for(int i = 0; i < xnumLabelArray.size(); i++){
+        window->draw(xnumLabelArray.at(i));
+    }
+
+    //Draw y label numbers
+    for(int i = 0; i < ynumLabelArray.size(); i++){
+        window->draw(ynumLabelArray.at(i));
+    }
+
+    //Draw x axis and number indicators
     window->draw(xAxisArray);
     window->draw(xnumArray);
 
+    //Draw y axis and number indicators
     window->draw(yAxisArray);
     window->draw(ynumArray);
 
+    //axis labels
     window->draw(xLabelText);
     window->draw(yLabelText);
+
+    //Draw value closest to mouse
+    sf::Vector2f closestDataValuePosition = sf::Vector2f(MAXFLOAT, MAXFLOAT);
+    sf::Vector2f closestDataValue;
+    float closestDataValueDistance = MAXFLOAT;
+    for(int di = 0; di < DataSets.size(); di++)
+    {
+        for(int i = 0; i < DataSets[di].data.size(); i++)
+        {
+            sf::Vector2f dataCoord = CoordToWindowLocation(xAxis[i], DataSets[di].data[i], window);
+            sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
+
+            double dist = distSq(dataCoord, sf::Vector2f(mousePos.x, mousePos.y));
+            if(dist < closestDataValueDistance){
+                closestDataValueDistance = dist;
+                closestDataValuePosition = dataCoord;
+                closestDataValue = sf::Vector2f(xAxis[i], DataSets[di].data[i]);
+            }
+        }
+    }
+
+    if(closestDataValueDistance < 20 * 20) {
+        sf::Text closestDataLabel;
+
+        closestDataLabel.setFont(*font);
+        closestDataLabel.setCharacterSize(15);
+        closestDataLabel.setPosition(closestDataValuePosition.x, closestDataValuePosition.y);
+        closestDataLabel.setString(
+                "(X: " + ToString(closestDataValue.x, 2) + " | Y: " + ToString(closestDataValue.y, 2) + ")");
+
+        sf::FloatRect fr = closestDataLabel.getLocalBounds();
+        closestDataLabel.move(sf::Vector2f(-fr.width / 2, -2 * fr.height));
+
+        sf::Vector2f pos = closestDataLabel.getPosition();
+        sf::Vector2u wDim = window->getSize();
+        if(pos.x < 0){
+            pos.x = 0;
+        }
+        else if(pos.x + fr.width > wDim.x){
+            pos.x = wDim.x - fr.width;
+        }
+        if(pos.y < 0){
+            pos.y = 0;
+        }
+        else if(pos.y + fr.height > wDim.y){
+            pos.y = wDim.y - fr.height;
+        }
+        closestDataLabel.setPosition(pos);
+
+        window->draw(closestDataLabel);
+    }
 }
