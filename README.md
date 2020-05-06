@@ -19,6 +19,18 @@ A C++ Plot Library to be used in combination with SFML
 
 The file main.cpp provides an example of how to use this library
 
+How to compile this example
+<b>Depending on your OS and installation, you might need to adjust the SFML path in SFPlot/CMakeLists.txt to fit your installation of SFML.</b>
+```
+cmake .
+make sfplot
+./sfplot
+```
+Include header in your main file
+```c++
+#include "SFPlot/SFPlot.h"
+```
+
 Create your data  
 ```c++
 //data arrays need to have the same length as the x axis array
@@ -28,7 +40,7 @@ DataSet set1(data1, sf::Color::Red, "Data1");
 ```  
 Create a SFPlot and plot your data, font is a sf::Font  
 ```c++
-SFPlot plotter(xax, "X Axis Label", "Y Axis Label", 50, &font);
+SFPlot plotter(xAxis, "X Axis Label", "Y Axis Label", 50, &font);
 plotter.plot(set1);
 ```  
 In case you want to limit the plots size, instead of it filling the window use:

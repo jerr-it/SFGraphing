@@ -1,11 +1,12 @@
 #include <iostream>
-#include "SFPlot.h"
+#include "SFPlot/SFPlot.h"
 
 using namespace csrc;
 
 int main() {
         sf::Font font;
-        font.loadFromFile("Roboto-Regular.ttf");
+        //https://www.1001fonts.com/rm-typerighter-medium-font.html
+        font.loadFromFile("tmedium.ttf");
 
         std::vector<double> xax = {10, 20, 30, 40, 50, 60, 70, 80, 90};
 
@@ -38,6 +39,7 @@ int main() {
         sf::Texture texture;
         texture.create(windowDim.x, windowDim.y);
         sf::Image screenshot;
+
         while(window.isOpen()) {
                 sf::Event event;
                 if(window.pollEvent(event)) {
@@ -48,9 +50,9 @@ int main() {
 
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
                 {
-                    texture.update(window);
-                    screenshot = texture.copyToImage();
-                    screenshot.saveToFile("screenshot.png");
+                        texture.update(window);
+                        screenshot = texture.copyToImage();
+                        screenshot.saveToFile("screenshot.png");
                 }
 
                 window.clear(sf::Color(50, 50, 50));
