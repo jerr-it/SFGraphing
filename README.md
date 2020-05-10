@@ -1,4 +1,4 @@
-<h1 align="center">SFPlot</h1>
+<h1 align="center">SFGraphing</h1>
 
 <p align="center">
 <img src="https://img.shields.io/badge/Language-C++-blue?style=for-the-badge&logo=c%2B%2Bl" />
@@ -10,50 +10,124 @@ A C++ Plot Library to be used in combination with SFML
 </p>
 
 <p align="center">
-    <img src="img/points.png" width=400/>
-    <img src="img/lines.png" width=400/>
-    <img src="img/bars.png" width=400/>
+    <img src="img/screenshot.png" width=400/>
+    <img src="img/screenshot2.png" width=400/>
+    <img src="img/screenshot3.png" width=805/>
 </div>
+
+<h2 align="center">Newest Version</h2>
+
+<p align="center">
+Entirely rewritten for better readability.  <br>
+Added <b>Piecharts</b>! <br>
+You can now set Position and Dimension of Plots
+</p>
 
 <h2 align="center">How to use</h2>
 
-The file main.cpp provides an example of how to use this library
+The file main.cpp provides more details on how to use this library
 
-How to compile this example
-<b>Depending on your OS and installation, you might need to adjust the SFML path in SFPlot/CMakeLists.txt to fit your installation of SFML.</b>
+How to compile this example <br>
 ```
 cmake .
-make sfplot
-./sfplot
+make graphing
+./graphing
 ```
+<b>Depending on your OS and installation, you might need to adjust the SFML path in SFPlot/CMakeLists.txt to fit your installation of SFML.</b><br>
 Include header in your main file
 ```c++
-#include "SFPlot/SFPlot.h"
+#include "SFGraphing/SFPlot.h"
+#include "SFGraphing/SFPieChart.h"
 ```
 
-Create your data  
+Important: You need a font, otherwise text wont display!
 ```c++
-//data arrays need to have the same length as the x axis array
-std::vector<double> xAxis = {10, 20, 30, 40, 50, 60, 70, 80, 90};
-std::vector<double> data1 = {0, 50, 25, 17.5, 9, 4, 2, 1, 1, 1, 1};
-DataSet set1(data1, sf::Color::Red, "Data1");
-```  
-Create a SFPlot and plot your data, font is a sf::Font  
-```c++
-SFPlot plotter(xAxis, "X Axis Label", "Y Axis Label", 50, &font);
-plotter.plot(set1);
-```  
-In case you want to limit the plots size, instead of it filling the window use:
-```c++
-plotter.overrideWindowSize(400,400);
+sf::Font font;
+font.loadFromFile("YourFontHere.ttf");
 ```
-Call setup, window is a sf::RenderWindow  
+
+<h2 align="center">Plot</h2>
+
+Create a dataset
 ```c++
-plotter.setup(&window, PlotType::Line);
-```  
-In your window loop:  
+std::vector<float> xAxis = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+std::vector<float> yAxis = {1, 2, 3, 4, 5, 6, 5, 6, 7, 8};
+
+PlotDataSet set(xAxis, yAxis, sf::Color::Green, "Green Data", PlottingType::LINE);
+```
+Available plotting types are POINTS, LINE and BARS
+
+Create your plot and add your dataset
+```c++
+//Position, dimension, margin, font
+SFPlot plot(sf::Vector2f(800, 0), sf::Vector2f(800, 800), 50, &font);
+plot.AddDataSet(&set);
+```
+
+Initialize the plott
+```c++
+//x-minimum, x-maximum, y-minimum, y-maximum, x-step-size, y-step-size, Color of axes
+plot.SetupAxes(0, 10, 0, 10, 1, 1, sf::Color::White);
+plot.GenerateVertices();
+```
+In case you want SFPlot to determine the axes scaling and numbering automatically, call without parameters:
+```c++
+plot.SetupAxes();
+plot.GenerateVertices();
+```
+Display data (int your window loop)
 ```c++
 window.clear();
-plotter.RenderTo(&window);
+window.draw(plot);
+window.display();
+```
+Want to update data in real time?
+```c++
+window.clear();
+plot.ClearVertices();
+
+set.SetDataValue(0, set.GetDataValue(0) + sf::Vector2f(0, 0.001));
+
+plot.SetupAxes();
+plot.GenerateVertices();
+
+window.draw(plot);
+window.display();
+```
+
+<h2 align="center">Pie Chart</h2>
+
+Create dataset
+```c++
+std::vector<float> values = {100, 230, 150, 100};
+std::vector<sf::Color> colors = {sf::Color::Blue, sf::Color::Red, sf::Color::Magenta, sf::Color::Cyan};
+std::vector<std::string> labels = {"A", "B", "C", "D"};
+//Representations: ABSOLUTE, RELATIVE
+PieChartDataSet pSet(values, labels, Representation::RELATIVE, colors);
+```
+Create PieChart
+```c++
+//Dataset, Position, Radius, Font
+SFPieChart pChart(&pSet, sf::Vector2f(250, 400), 200, &font);
+```
+Initialize
+```c++
+pChart.GenerateVertices();
+```
+Display
+```c++
+window.clear();
+window.draw(pChart);
+window.display();
+```
+Update data in real time?
+```c++
+window.clear();
+pChart.ClearVertices();
+
+pSet.SetValue(0, pSet.GetValue(0) + 0.003);
+
+pChart.GenerateVertices();
+window.draw(pChart);
 window.display();
 ```

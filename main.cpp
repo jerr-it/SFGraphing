@@ -1,62 +1,100 @@
 #include <iostream>
-#include "SFPlot/SFPlot.h"
+
+#include "SFGraphing/SFPlot.h"
+#include "SFGraphing/SFPieChart.h"
 
 using namespace csrc;
 
-int main() {
-        sf::Font font;
-        //https://www.1001fonts.com/rm-typerighter-medium-font.html
-        font.loadFromFile("tmedium.ttf");
-
-        std::vector<double> xax = {10, 20, 30, 40, 50, 60, 70, 80, 90};
-
-        std::vector<double> data1 = {50, 25, 17.5, 9, 4, 2, 1, 1, 1};
-        DataSet set1(data1, sf::Color(156, 0, 0), "Red Graph");
-
-        std::vector<double> data2 = {56, 12, 46, 77, 41, 4, 6, 54, 10};
-        DataSet set2(data2, sf::Color(0, 156, 0), "Green Graph");
-
-        std::vector<double> data3 = {56, 12, 13, 55, 26, 4, 6, 54, 43};
-        DataSet set3(data3, sf::Color(0, 0, 150), "Blue Graph");
-
-        std::vector<double> data4 = {50, 25, 12, 10, 9, 8, 6, 54, 43};
-        DataSet set4(data4, sf::Color(150, 150, 0), "Some Graph");
-
-        SFPlot plotter(xax, "X Label", "Y Label", 50, &font);
-        plotter.plot(set1);
-        plotter.plot(set2);
-        plotter.plot(set3);
-        plotter.plot(set4);
-
+int main()
+{
         sf::ContextSettings settings;
         settings.antialiasingLevel = 4;
 
-        sf::RenderWindow window(sf::VideoMode(800, 600), "Plot Test",sf::Style::Default, settings);
+        sf::RenderWindow window(sf::VideoMode(1600, 800), "SF-Graphing", sf::Style::Default, settings);
 
-        plotter.setup(&window, PlotType::Points);
+        sf::Font font;
+        font.loadFromFile("JetBrainsMono-Regular.ttf");
 
-        sf::Vector2 windowDim = window.getSize();
-        sf::Texture texture;
-        texture.create(windowDim.x, windowDim.y);
-        sf::Image screenshot;
+        /*
+         * Plot
+         */
+        std::vector<float> xAxis = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        std::vector<float> yAxis = {1, 2, 3, 4, 5, 6, 5, 6, 7, 8};
 
-        while(window.isOpen()) {
+        PlotDataSet set(xAxis, yAxis, sf::Color::Green, "Green Data", PlottingType::LINE);
+
+        std::vector<float> xAxis2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        std::vector<float> yAxis2 = {1, 1, 1, 2, 4, 6, 6, 8, 9, 10};
+
+        PlotDataSet set2(xAxis2, yAxis2, sf::Color::Cyan, "Cyan Data", PlottingType::BARS);
+
+        SFPlot plot(sf::Vector2f(800, 0), sf::Vector2f(800, 800), 50, &font);
+        plot.AddDataSet(&set);
+        plot.AddDataSet(&set2);
+        //x-minimum, x-maximum, y-minimum, y-maximum, x-step-size, y-step-size, Color of axes
+        plot.SetupAxes(0, 10, 0, 10, 1, 1, sf::Color::White);
+        plot.GenerateVertices();
+
+        /*
+         * Pie Chart
+         */
+        std::vector<float> values = {100, 230, 150, 100};
+        std::vector<sf::Color> colors = {sf::Color::Blue, sf::Color::Red, sf::Color::Magenta, sf::Color::Cyan};
+        std::vector<std::string> labels = {"A", "B", "C", "D"};
+        PieChartDataSet pSet(values, labels, Representation::RELATIVE, colors);
+
+        SFPieChart pChart(&pSet, sf::Vector2f(250, 400), 200, &font);
+        pChart.GenerateVertices();
+
+        while (window.isOpen())
+        {
                 sf::Event event;
-                if(window.pollEvent(event)) {
-                        if(event.type == sf::Event::Closed) {
+                if (window.pollEvent(event))
+                {
+                        if (event.type == sf::Event::Closed)
+                        {
                                 window.close();
                         }
                 }
 
+                window.clear(sf::Color(30, 30, 30));
+
+                /*
+                 * Update Plot in Real-Time
+                 */
+                plot.ClearVertices();
+
+                set.SetDataValue(0, set.GetDataValue(0) + sf::Vector2f(0, 0.001));
+
+                //Calling without parameters makes the Plot auto-deduce the size of the plot
+                plot.SetupAxes();
+                plot.GenerateVertices();
+
+                window.draw(plot);
+                /*
+                 * ----------------------------------
+                 * Update Pie Chart in Real-Time
+                 */
+                pChart.ClearVertices();
+
+                pSet.SetValue(0, pSet.GetValue(0) + 0.003);
+
+                pChart.GenerateVertices();
+                window.draw(pChart);
+                /*
+                 * ----------------------------------
+                 */
+
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
                 {
+                        sf::Vector2u wSize = window.getSize();
+                        sf::Texture texture;
+                        texture.create(wSize.x, wSize.y);
                         texture.update(window);
-                        screenshot = texture.copyToImage();
+                        sf::Image screenshot = texture.copyToImage();
                         screenshot.saveToFile("screenshot.png");
                 }
 
-                window.clear(sf::Color(50, 50, 50));
-                plotter.RenderTo(&window);
                 window.display();
         }
 

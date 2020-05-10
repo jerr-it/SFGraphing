@@ -1,10 +1,8 @@
 cmake_minimum_required(VERSION 3.15)
-project(sfplot)
+project(graphing)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a")
+set(CMAKE_CXX_STANDARD 14)
 
-add_subdirectory(SFPlot)
-
-add_executable(sfplot main.cpp)
-target_link_libraries(sfplot SFPlot)
+add_subdirectory(SFGraphing)
+add_executable(graphing main.cpp)
+target_link_libraries(graphing SFGraphing)
