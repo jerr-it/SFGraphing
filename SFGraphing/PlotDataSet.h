@@ -1,3 +1,13 @@
+/**
+ * @file Plot data file
+ *
+ * @author Jerrit Gläsker
+ * @date 22.05.202
+ *
+ * @license MIT-License
+ */
+
+
 #ifndef SFGRAPHING_PLOTDATASET_H
 #define SFGRAPHING_PLOTDATASET_H
 
@@ -9,49 +19,107 @@
 
 namespace csrc
 {
-    enum PlottingType
-    {
-        POINTS,
-        LINE,
-        BARS
-    };
+enum PlottingType
+{
+    POINTS,
+    LINE,
+    BARS
+};
 
-    class PlotDataSet
-    {
-    private:
-        std::vector<float> _yValues;
-        std::vector<float> _xValues;
-        sf::Color _color;
-        std::string _label;
-        PlottingType _pType;
-    public:
-        PlotDataSet();
+class PlotDataSet
+{
+private:
+    std::vector <float> _yValues;
+    std::vector <float> _xValues;
+    sf::Color _color;
+    std::string _label;
+    PlottingType _pType;
+public:
 
-        PlotDataSet(std::vector<float> xValues, std::vector<float> yValues, sf::Color color, std::string label,
-                    PlottingType type);
+    /**
+     * Create empty data
+     */
+    PlotDataSet();
 
-        std::vector<float> GetXValues();
+    /**
+     * Dataset constructor
+     * @param xValues vector of doubles, representing x axis
+     * @param yValues vector of doubles, representing y axis
+     * @param color   color of the bars/points/line
+     * @param label   data label
+     * @param type    bars/points/line
+     */
+    PlotDataSet(std::vector <float> xValues, std::vector <float> yValues, sf::Color color, std::string label,
+                PlottingType type);
 
-        std::vector<float> GetYValues();
+    /**
+     * _xValues Getter
+     * @return _xValues
+     */
+    std::vector <float> GetXValues();
 
-        int GetDataLength();
+    /**
+     * _yValues Getter
+     * @return _yValues
+     */
+    std::vector <float> GetYValues();
 
-        sf::Vector2f GetDataValue(int);
+    /**
+     * Get element count (_xValues ad _yValues always the same size)
+     * @return _xValues.size()
+     */
+    int GetDataLength();
 
-        void SetDataValue(int i, sf::Vector2f valuePair);
+    /**
+     * Get a specific value
+     * @param  i index
+     * @return   value pair at i
+     */
+    sf::Vector2f GetDataValue(int i);
 
-        sf::Color GetColor();
+    /**
+     * Setter for a certain value, by index
+     * @param i         index
+     * @param valuePair new x and y values
+     */
+    void SetDataValue(int i, sf::Vector2f valuePair);
 
-        void SetColor(sf::Color);
+    /**
+     * _color Getter
+     * @return _color
+     */
+    sf::Color GetColor();
 
-        std::string GetLabel();
+    /**
+     * _color Setter
+     * @param color _color
+     */
+    void SetColor(sf::Color color);
 
-        void SetLabel(std::string);
+    /**
+     * _label Getter
+     * @return _label
+     */
+    std::string GetLabel();
 
-        PlottingType GetPlottingType();
+    /**
+     * _label Setter
+     * @param lab new _label
+     */
+    void SetLabel(std::string lab);
 
-        void SetPlottingType(PlottingType type);
-    };
+    /**
+     * _plotType Getter
+     * @return _plotType
+     */
+    PlottingType GetPlottingType();
+
+    /**
+     * _plotType Setter
+     * @param type new _plotType
+     */
+    void SetPlottingType(PlottingType type);
+};
 }
 
 #endif //SFGRAPHING_PLOTDATASET_H

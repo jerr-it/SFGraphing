@@ -1,0 +1,129 @@
+\hypertarget{classcsrc_1_1PieChartDataSet}{}\doxysection{csrc\+::Pie\+Chart\+Data\+Set Class Reference}
+\label{classcsrc_1_1PieChartDataSet}\index{csrc::PieChartDataSet@{csrc::PieChartDataSet}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcsrc_1_1PieChartDataSet_a45689511ab50ba4dd6bd6085157ee8ff}{Pie\+Chart\+Data\+Set}} ()
+\item 
+\mbox{\hyperlink{classcsrc_1_1PieChartDataSet_a39492281f757ce72f91eecfb3154674d}{Pie\+Chart\+Data\+Set}} (std\+::vector$<$ float $>$ values, std\+::vector$<$ std\+::string $>$ labels, Representation representation, std\+::vector$<$ sf\+::\+Color $>$ colors)
+\item 
+int \mbox{\hyperlink{classcsrc_1_1PieChartDataSet_a55ce781af737471c58d925d554078938}{Get\+Length}} ()
+\item 
+float \mbox{\hyperlink{classcsrc_1_1PieChartDataSet_ab754fe8f4a9fb216fadc797e7ec56058}{Get\+Value}} (int i)
+\item 
+std\+::string \mbox{\hyperlink{classcsrc_1_1PieChartDataSet_a8ac1cd85d173360c29113304f91ad475}{Get\+Label}} (int i)
+\item 
+sf\+::\+Color \mbox{\hyperlink{classcsrc_1_1PieChartDataSet_a3e04f9f72a0670bb66559322637b2d4c}{Get\+Color}} (int i)
+\item 
+Representation \mbox{\hyperlink{classcsrc_1_1PieChartDataSet_a79a9e1ca0ae8ca60824058b4b9b5dc2a}{Get\+Representation}} ()
+\item 
+void \mbox{\hyperlink{classcsrc_1_1PieChartDataSet_a1370bd057f9828f1d406a8308ecd97e3}{Set\+Value}} (int i, float value)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcsrc_1_1PieChartDataSet_a45689511ab50ba4dd6bd6085157ee8ff}\label{classcsrc_1_1PieChartDataSet_a45689511ab50ba4dd6bd6085157ee8ff}} 
+\index{csrc::PieChartDataSet@{csrc::PieChartDataSet}!PieChartDataSet@{PieChartDataSet}}
+\index{PieChartDataSet@{PieChartDataSet}!csrc::PieChartDataSet@{csrc::PieChartDataSet}}
+\doxysubsubsection{\texorpdfstring{PieChartDataSet()}{PieChartDataSet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Pie\+Chart\+Data\+Set\+::\+Pie\+Chart\+Data\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Create empty data \mbox{\Hypertarget{classcsrc_1_1PieChartDataSet_a39492281f757ce72f91eecfb3154674d}\label{classcsrc_1_1PieChartDataSet_a39492281f757ce72f91eecfb3154674d}} 
+\index{csrc::PieChartDataSet@{csrc::PieChartDataSet}!PieChartDataSet@{PieChartDataSet}}
+\index{PieChartDataSet@{PieChartDataSet}!csrc::PieChartDataSet@{csrc::PieChartDataSet}}
+\doxysubsubsection{\texorpdfstring{PieChartDataSet()}{PieChartDataSet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Pie\+Chart\+Data\+Set\+::\+Pie\+Chart\+Data\+Set (\begin{DoxyParamCaption}\item[{std\+::vector$<$ float $>$}]{values,  }\item[{std\+::vector$<$ std\+::string $>$}]{labels,  }\item[{Representation}]{representation,  }\item[{std\+::vector$<$ sf\+::\+Color $>$}]{colors }\end{DoxyParamCaption})}
+
+Create specific data values, labels and colors have to be the same size 
+\begin{DoxyParams}{Parameters}
+{\em values} & sizes of the pie segments \\
+\hline
+{\em labels} & labels of each segment \\
+\hline
+{\em representation} & relative/absolute \\
+\hline
+{\em colors} & colors of segments \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcsrc_1_1PieChartDataSet_a3e04f9f72a0670bb66559322637b2d4c}\label{classcsrc_1_1PieChartDataSet_a3e04f9f72a0670bb66559322637b2d4c}} 
+\index{csrc::PieChartDataSet@{csrc::PieChartDataSet}!GetColor@{GetColor}}
+\index{GetColor@{GetColor}!csrc::PieChartDataSet@{csrc::PieChartDataSet}}
+\doxysubsubsection{\texorpdfstring{GetColor()}{GetColor()}}
+{\footnotesize\ttfamily sf\+::\+Color Pie\+Chart\+Data\+Set\+::\+Get\+Color (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+Get color of segment i 
+\begin{DoxyParams}{Parameters}
+{\em i} & index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+color of segment i 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcsrc_1_1PieChartDataSet_a8ac1cd85d173360c29113304f91ad475}\label{classcsrc_1_1PieChartDataSet_a8ac1cd85d173360c29113304f91ad475}} 
+\index{csrc::PieChartDataSet@{csrc::PieChartDataSet}!GetLabel@{GetLabel}}
+\index{GetLabel@{GetLabel}!csrc::PieChartDataSet@{csrc::PieChartDataSet}}
+\doxysubsubsection{\texorpdfstring{GetLabel()}{GetLabel()}}
+{\footnotesize\ttfamily std\+::string Pie\+Chart\+Data\+Set\+::\+Get\+Label (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+Get label of segment i 
+\begin{DoxyParams}{Parameters}
+{\em i} & index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+label of segment i 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcsrc_1_1PieChartDataSet_a55ce781af737471c58d925d554078938}\label{classcsrc_1_1PieChartDataSet_a55ce781af737471c58d925d554078938}} 
+\index{csrc::PieChartDataSet@{csrc::PieChartDataSet}!GetLength@{GetLength}}
+\index{GetLength@{GetLength}!csrc::PieChartDataSet@{csrc::PieChartDataSet}}
+\doxysubsubsection{\texorpdfstring{GetLength()}{GetLength()}}
+{\footnotesize\ttfamily int Pie\+Chart\+Data\+Set\+::\+Get\+Length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get Segment Count \begin{DoxyReturn}{Returns}
+segment count 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcsrc_1_1PieChartDataSet_a79a9e1ca0ae8ca60824058b4b9b5dc2a}\label{classcsrc_1_1PieChartDataSet_a79a9e1ca0ae8ca60824058b4b9b5dc2a}} 
+\index{csrc::PieChartDataSet@{csrc::PieChartDataSet}!GetRepresentation@{GetRepresentation}}
+\index{GetRepresentation@{GetRepresentation}!csrc::PieChartDataSet@{csrc::PieChartDataSet}}
+\doxysubsubsection{\texorpdfstring{GetRepresentation()}{GetRepresentation()}}
+{\footnotesize\ttfamily Representation Pie\+Chart\+Data\+Set\+::\+Get\+Representation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get piechart representation \begin{DoxyReturn}{Returns}
+\+\_\+representation 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcsrc_1_1PieChartDataSet_ab754fe8f4a9fb216fadc797e7ec56058}\label{classcsrc_1_1PieChartDataSet_ab754fe8f4a9fb216fadc797e7ec56058}} 
+\index{csrc::PieChartDataSet@{csrc::PieChartDataSet}!GetValue@{GetValue}}
+\index{GetValue@{GetValue}!csrc::PieChartDataSet@{csrc::PieChartDataSet}}
+\doxysubsubsection{\texorpdfstring{GetValue()}{GetValue()}}
+{\footnotesize\ttfamily float Pie\+Chart\+Data\+Set\+::\+Get\+Value (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+Get size of specific segment 
+\begin{DoxyParams}{Parameters}
+{\em i} & index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+segment i 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcsrc_1_1PieChartDataSet_a1370bd057f9828f1d406a8308ecd97e3}\label{classcsrc_1_1PieChartDataSet_a1370bd057f9828f1d406a8308ecd97e3}} 
+\index{csrc::PieChartDataSet@{csrc::PieChartDataSet}!SetValue@{SetValue}}
+\index{SetValue@{SetValue}!csrc::PieChartDataSet@{csrc::PieChartDataSet}}
+\doxysubsubsection{\texorpdfstring{SetValue()}{SetValue()}}
+{\footnotesize\ttfamily void Pie\+Chart\+Data\+Set\+::\+Set\+Value (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{float}]{value }\end{DoxyParamCaption})}
+
+Set a segments value 
+\begin{DoxyParams}{Parameters}
+{\em i} & index \\
+\hline
+{\em value} & new value \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+S\+F\+Graphing/Pie\+Chart\+Data\+Set.\+h\item 
+S\+F\+Graphing/Pie\+Chart\+Data\+Set.\+cpp\end{DoxyCompactItemize}

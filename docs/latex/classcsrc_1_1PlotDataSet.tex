@@ -1,0 +1,182 @@
+\hypertarget{classcsrc_1_1PlotDataSet}{}\doxysection{csrc\+::Plot\+Data\+Set Class Reference}
+\label{classcsrc_1_1PlotDataSet}\index{csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcsrc_1_1PlotDataSet_a720b35617dd935dea8dfa0e235f0005a}{Plot\+Data\+Set}} ()
+\item 
+\mbox{\hyperlink{classcsrc_1_1PlotDataSet_a4efeadf939ac7730aea112905d3b2e1a}{Plot\+Data\+Set}} (std\+::vector$<$ float $>$ x\+Values, std\+::vector$<$ float $>$ y\+Values, sf\+::\+Color color, std\+::string label, Plotting\+Type type)
+\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{classcsrc_1_1PlotDataSet_ae6ed4c648466bbbdf894cd188c6d4023}{Get\+X\+Values}} ()
+\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{classcsrc_1_1PlotDataSet_a50dc76884c60dcfd775bf520e706e2e3}{Get\+Y\+Values}} ()
+\item 
+int \mbox{\hyperlink{classcsrc_1_1PlotDataSet_a6b3846f74a1c8a1b86e473ecd44ad9e8}{Get\+Data\+Length}} ()
+\item 
+sf\+::\+Vector2f \mbox{\hyperlink{classcsrc_1_1PlotDataSet_ad13bfce23d6a72109b561ddd07243181}{Get\+Data\+Value}} (int i)
+\item 
+void \mbox{\hyperlink{classcsrc_1_1PlotDataSet_ad093cd28913f9d5e80e7b0f2573a54bc}{Set\+Data\+Value}} (int i, sf\+::\+Vector2f value\+Pair)
+\item 
+sf\+::\+Color \mbox{\hyperlink{classcsrc_1_1PlotDataSet_a72e4766d507dac574407a9c82d103f5e}{Get\+Color}} ()
+\item 
+void \mbox{\hyperlink{classcsrc_1_1PlotDataSet_a995370ef0f3f4c69052087e1e269b4b0}{Set\+Color}} (sf\+::\+Color color)
+\item 
+std\+::string \mbox{\hyperlink{classcsrc_1_1PlotDataSet_a5014731818fc9712309b3c9eb28c8628}{Get\+Label}} ()
+\item 
+void \mbox{\hyperlink{classcsrc_1_1PlotDataSet_a1946ab257a772e2c3b82ae8d66b8769f}{Set\+Label}} (std\+::string lab)
+\item 
+Plotting\+Type \mbox{\hyperlink{classcsrc_1_1PlotDataSet_a0a71694e475c3816f4bee07ec5a56b58}{Get\+Plotting\+Type}} ()
+\item 
+void \mbox{\hyperlink{classcsrc_1_1PlotDataSet_a4d390d7e6b7b2550667480752d3f6994}{Set\+Plotting\+Type}} (Plotting\+Type type)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcsrc_1_1PlotDataSet_a720b35617dd935dea8dfa0e235f0005a}\label{classcsrc_1_1PlotDataSet_a720b35617dd935dea8dfa0e235f0005a}} 
+\index{csrc::PlotDataSet@{csrc::PlotDataSet}!PlotDataSet@{PlotDataSet}}
+\index{PlotDataSet@{PlotDataSet}!csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsubsection{\texorpdfstring{PlotDataSet()}{PlotDataSet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Plot\+Data\+Set\+::\+Plot\+Data\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Create empty data \mbox{\Hypertarget{classcsrc_1_1PlotDataSet_a4efeadf939ac7730aea112905d3b2e1a}\label{classcsrc_1_1PlotDataSet_a4efeadf939ac7730aea112905d3b2e1a}} 
+\index{csrc::PlotDataSet@{csrc::PlotDataSet}!PlotDataSet@{PlotDataSet}}
+\index{PlotDataSet@{PlotDataSet}!csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsubsection{\texorpdfstring{PlotDataSet()}{PlotDataSet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Plot\+Data\+Set\+::\+Plot\+Data\+Set (\begin{DoxyParamCaption}\item[{std\+::vector$<$ float $>$}]{x\+Values,  }\item[{std\+::vector$<$ float $>$}]{y\+Values,  }\item[{sf\+::\+Color}]{color,  }\item[{std\+::string}]{label,  }\item[{Plotting\+Type}]{type }\end{DoxyParamCaption})}
+
+Dataset constructor 
+\begin{DoxyParams}{Parameters}
+{\em x\+Values} & vector of doubles, representing x axis \\
+\hline
+{\em y\+Values} & vector of doubles, representing y axis \\
+\hline
+{\em color} & color of the bars/points/line \\
+\hline
+{\em label} & data label \\
+\hline
+{\em type} & bars/points/line \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcsrc_1_1PlotDataSet_a72e4766d507dac574407a9c82d103f5e}\label{classcsrc_1_1PlotDataSet_a72e4766d507dac574407a9c82d103f5e}} 
+\index{csrc::PlotDataSet@{csrc::PlotDataSet}!GetColor@{GetColor}}
+\index{GetColor@{GetColor}!csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsubsection{\texorpdfstring{GetColor()}{GetColor()}}
+{\footnotesize\ttfamily sf\+::\+Color Plot\+Data\+Set\+::\+Get\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\+\_\+color Getter \begin{DoxyReturn}{Returns}
+\+\_\+color 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcsrc_1_1PlotDataSet_a6b3846f74a1c8a1b86e473ecd44ad9e8}\label{classcsrc_1_1PlotDataSet_a6b3846f74a1c8a1b86e473ecd44ad9e8}} 
+\index{csrc::PlotDataSet@{csrc::PlotDataSet}!GetDataLength@{GetDataLength}}
+\index{GetDataLength@{GetDataLength}!csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsubsection{\texorpdfstring{GetDataLength()}{GetDataLength()}}
+{\footnotesize\ttfamily int Plot\+Data\+Set\+::\+Get\+Data\+Length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get element count (\+\_\+x\+Values ad \+\_\+y\+Values always the same size) \begin{DoxyReturn}{Returns}
+\+\_\+x\+Values.\+size() 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcsrc_1_1PlotDataSet_ad13bfce23d6a72109b561ddd07243181}\label{classcsrc_1_1PlotDataSet_ad13bfce23d6a72109b561ddd07243181}} 
+\index{csrc::PlotDataSet@{csrc::PlotDataSet}!GetDataValue@{GetDataValue}}
+\index{GetDataValue@{GetDataValue}!csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsubsection{\texorpdfstring{GetDataValue()}{GetDataValue()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Plot\+Data\+Set\+::\+Get\+Data\+Value (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+Get a specific value 
+\begin{DoxyParams}{Parameters}
+{\em i} & index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value pair at i 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcsrc_1_1PlotDataSet_a5014731818fc9712309b3c9eb28c8628}\label{classcsrc_1_1PlotDataSet_a5014731818fc9712309b3c9eb28c8628}} 
+\index{csrc::PlotDataSet@{csrc::PlotDataSet}!GetLabel@{GetLabel}}
+\index{GetLabel@{GetLabel}!csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsubsection{\texorpdfstring{GetLabel()}{GetLabel()}}
+{\footnotesize\ttfamily std\+::string Plot\+Data\+Set\+::\+Get\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\+\_\+label Getter \begin{DoxyReturn}{Returns}
+\+\_\+label 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcsrc_1_1PlotDataSet_a0a71694e475c3816f4bee07ec5a56b58}\label{classcsrc_1_1PlotDataSet_a0a71694e475c3816f4bee07ec5a56b58}} 
+\index{csrc::PlotDataSet@{csrc::PlotDataSet}!GetPlottingType@{GetPlottingType}}
+\index{GetPlottingType@{GetPlottingType}!csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsubsection{\texorpdfstring{GetPlottingType()}{GetPlottingType()}}
+{\footnotesize\ttfamily Plotting\+Type Plot\+Data\+Set\+::\+Get\+Plotting\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\+\_\+plot\+Type Getter \begin{DoxyReturn}{Returns}
+\+\_\+plot\+Type 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcsrc_1_1PlotDataSet_ae6ed4c648466bbbdf894cd188c6d4023}\label{classcsrc_1_1PlotDataSet_ae6ed4c648466bbbdf894cd188c6d4023}} 
+\index{csrc::PlotDataSet@{csrc::PlotDataSet}!GetXValues@{GetXValues}}
+\index{GetXValues@{GetXValues}!csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsubsection{\texorpdfstring{GetXValues()}{GetXValues()}}
+{\footnotesize\ttfamily std\+::vector$<$ float $>$ Plot\+Data\+Set\+::\+Get\+X\+Values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\+\_\+x\+Values Getter \begin{DoxyReturn}{Returns}
+\+\_\+x\+Values 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcsrc_1_1PlotDataSet_a50dc76884c60dcfd775bf520e706e2e3}\label{classcsrc_1_1PlotDataSet_a50dc76884c60dcfd775bf520e706e2e3}} 
+\index{csrc::PlotDataSet@{csrc::PlotDataSet}!GetYValues@{GetYValues}}
+\index{GetYValues@{GetYValues}!csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsubsection{\texorpdfstring{GetYValues()}{GetYValues()}}
+{\footnotesize\ttfamily std\+::vector$<$ float $>$ Plot\+Data\+Set\+::\+Get\+Y\+Values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\+\_\+y\+Values Getter \begin{DoxyReturn}{Returns}
+\+\_\+y\+Values 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcsrc_1_1PlotDataSet_a995370ef0f3f4c69052087e1e269b4b0}\label{classcsrc_1_1PlotDataSet_a995370ef0f3f4c69052087e1e269b4b0}} 
+\index{csrc::PlotDataSet@{csrc::PlotDataSet}!SetColor@{SetColor}}
+\index{SetColor@{SetColor}!csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsubsection{\texorpdfstring{SetColor()}{SetColor()}}
+{\footnotesize\ttfamily void Plot\+Data\+Set\+::\+Set\+Color (\begin{DoxyParamCaption}\item[{sf\+::\+Color}]{color }\end{DoxyParamCaption})}
+
+\+\_\+color Setter 
+\begin{DoxyParams}{Parameters}
+{\em color} & \+\_\+color \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcsrc_1_1PlotDataSet_ad093cd28913f9d5e80e7b0f2573a54bc}\label{classcsrc_1_1PlotDataSet_ad093cd28913f9d5e80e7b0f2573a54bc}} 
+\index{csrc::PlotDataSet@{csrc::PlotDataSet}!SetDataValue@{SetDataValue}}
+\index{SetDataValue@{SetDataValue}!csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsubsection{\texorpdfstring{SetDataValue()}{SetDataValue()}}
+{\footnotesize\ttfamily void Plot\+Data\+Set\+::\+Set\+Data\+Value (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{sf\+::\+Vector2f}]{value\+Pair }\end{DoxyParamCaption})}
+
+Setter for a certain value, by index 
+\begin{DoxyParams}{Parameters}
+{\em i} & index \\
+\hline
+{\em value\+Pair} & new x and y values \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcsrc_1_1PlotDataSet_a1946ab257a772e2c3b82ae8d66b8769f}\label{classcsrc_1_1PlotDataSet_a1946ab257a772e2c3b82ae8d66b8769f}} 
+\index{csrc::PlotDataSet@{csrc::PlotDataSet}!SetLabel@{SetLabel}}
+\index{SetLabel@{SetLabel}!csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsubsection{\texorpdfstring{SetLabel()}{SetLabel()}}
+{\footnotesize\ttfamily void Plot\+Data\+Set\+::\+Set\+Label (\begin{DoxyParamCaption}\item[{std\+::string}]{lab }\end{DoxyParamCaption})}
+
+\+\_\+label Setter 
+\begin{DoxyParams}{Parameters}
+{\em lab} & new \+\_\+label \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcsrc_1_1PlotDataSet_a4d390d7e6b7b2550667480752d3f6994}\label{classcsrc_1_1PlotDataSet_a4d390d7e6b7b2550667480752d3f6994}} 
+\index{csrc::PlotDataSet@{csrc::PlotDataSet}!SetPlottingType@{SetPlottingType}}
+\index{SetPlottingType@{SetPlottingType}!csrc::PlotDataSet@{csrc::PlotDataSet}}
+\doxysubsubsection{\texorpdfstring{SetPlottingType()}{SetPlottingType()}}
+{\footnotesize\ttfamily void Plot\+Data\+Set\+::\+Set\+Plotting\+Type (\begin{DoxyParamCaption}\item[{Plotting\+Type}]{type }\end{DoxyParamCaption})}
+
+\+\_\+plot\+Type Setter 
+\begin{DoxyParams}{Parameters}
+{\em type} & new \+\_\+plot\+Type \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+S\+F\+Graphing/Plot\+Data\+Set.\+h\item 
+S\+F\+Graphing/Plot\+Data\+Set.\+cpp\end{DoxyCompactItemize}
