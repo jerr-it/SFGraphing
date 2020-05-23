@@ -17,54 +17,54 @@
 
 namespace csrc
 {
-class SFPieChart : public sf::Drawable
-{
-private:
-    sf::Font* _font;
-    PieChartDataSet* _dataset;
+    class SFPieChart : public sf::Drawable
+    {
+    private:
+        sf::Font* _font;
+        PieChartDataSet* _dataset;
+    
+        sf::Vector2f _position;
+        float _radius;
 
-    sf::Vector2f _position;
-    float _radius;
+        std::vector<sf::VertexArray> _pieSegments;
+        std::vector<sf::Text> _textElements;
 
-    std::vector <sf::VertexArray> _pieSegments;
-    std::vector <sf::Text> _textElements;
+        /**
+         * SFML Function override
+         * @param target sf::RenderTarget
+         * @param states sf::RenderStates
+         */
+        void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
-    /**
-     * SFML Function override
-     * @param target sf::RenderTarget
-     * @param states sf::RenderStates
-     */
-    void draw(sf::RenderTarget&target, sf::RenderStates states) const override;
+    public:
 
-public:
+        /**
+         * Standard constructor
+         * @param dataset  The pie chart data to be used
+         * @param position position of the pies center
+         * @param radius   radius of piechart
+         * @param font     sf::Font reference
+         */
+        SFPieChart(PieChartDataSet* dataset, sf::Vector2f position, float radius, sf::Font* font);
 
-    /**
-     * Standard constructor
-     * @param dataset  The pie chart data to be used
-     * @param position position of the pies center
-     * @param radius   radius of piechart
-     * @param font     sf::Font reference
-     */
-    SFPieChart(PieChartDataSet* dataset, sf::Vector2f position, float radius, sf::Font* font);
+        /**
+         * Creates a string representation of a double with 'precision' number of digits after comma
+         * @param  d         double to convert
+         * @param  precision number of digits after comma
+         * @return           String representation
+         */
+        std::string ToString(double d, int precision);
 
-    /**
-     * Creates a string representation of a double with 'precision' number of digits after comma
-     * @param  d         double to convert
-     * @param  precision number of digits after comma
-     * @return           String representation
-     */
-    std::string ToString(double d, int precision);
+        /**
+         * Function for generating SFML VertexArrays
+         */
+        void GenerateVertices();
 
-    /**
-     * Function for generating SFML VertexArrays
-     */
-    void GenerateVertices();
-
-    /**
-     * Function for clearing SFML VertexArrays
-     */
-    void ClearVertices();
-};
+        /**
+         * Function for clearing SFML VertexArrays
+         */
+        void ClearVertices();
+    };
 }
 
 #endif //GRAPHING_SFPIECHART_H

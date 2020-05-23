@@ -6,6 +6,7 @@ PlotDataSet::PlotDataSet()
 {
     _color = sf::Color::White;
     _label = "Unlabeled";
+    _pType = PlottingType::POINTS;
 }
 
 PlotDataSet::PlotDataSet(std::vector<float> xValues, std::vector<float> yValues, sf::Color color, std::string label,
@@ -79,4 +80,10 @@ std::vector<float> PlotDataSet::GetXValues()
 std::vector<float> PlotDataSet::GetYValues()
 {
     return _yValues;
+}
+
+void PlotDataSet::PushPair(sf::Vector2f pair)
+{
+    _xValues.push_back(pair.x);
+    _yValues.push_back(pair.y);
 }
