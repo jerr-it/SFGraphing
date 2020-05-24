@@ -40,12 +40,15 @@ std::string SFPlot::ToString(double d, int precision)
     return s;
 }
 
-SFPlot::SFPlot(sf::Vector2f position, sf::Vector2f dimension, float margin, sf::Font* font)
+SFPlot::SFPlot(sf::Vector2f position, sf::Vector2f dimension, float margin, sf::Font* font, std::string xLabel,
+               std::string yLabel)
 {
     _origin = position;
     _dimension = dimension;
     _margin = margin;
     _font = font;
+    _xAxisLabel = xLabel;
+    _yAxisLabel = yLabel;
 }
 
 void SFPlot::SetupAxes()
@@ -138,6 +141,32 @@ void SFPlot::GenerateVertices()
     _axesVertexArray.append(sf::Vertex(CoordToWindowPosition(sf::Vector2f(_xCoordBounds.y, 0)), _axesColor));
 
     /*
+     * Axis Labels
+     */
+    sf::Text xaxislabel;
+    xaxislabel.setFont(*_font);
+    xaxislabel.setCharacterSize(_margin * 0.35);
+    xaxislabel.setFillColor(_axesColor);
+    xaxislabel.setString(_xAxisLabel);
+
+    xaxislabel.setPosition(CoordToWindowPosition(sf::Vector2f(_xCoordBounds.y, 0)) + sf::Vector2f(_margin * 0.3, 0));
+
+    xaxislabel.rotate(-90);
+
+    _textElementArray.push_back(xaxislabel);
+
+    //------
+    sf::Text yaxislabel;
+    yaxislabel.setFont(*_font);
+    yaxislabel.setCharacterSize(_margin * 0.35);
+    yaxislabel.setFillColor(_axesColor);
+    yaxislabel.setString(_yAxisLabel);
+
+    yaxislabel.setPosition(_origin.x, _origin.y);
+
+    _textElementArray.push_back(yaxislabel);
+
+    /*
      * Calulating axes indicators and adding text
      */
     _axesIndicatorVertexArray.setPrimitiveType(sf::PrimitiveType::Lines);
@@ -161,7 +190,7 @@ void SFPlot::GenerateVertices()
         sf::FloatRect tDimension = indicatorText.getLocalBounds();
         indicatorText.setOrigin(tDimension.left + tDimension.width / 2, tDimension.top + tDimension.height / 2);
 
-        indicatorText.setPosition(windowPosition.x, windowPosition.y + (_margin * 0.6));
+        indicatorText.setPosition(windowPosition.x, windowPosition.y + (_margin * 0.5));
 
         _textElementArray.push_back(indicatorText);
     }

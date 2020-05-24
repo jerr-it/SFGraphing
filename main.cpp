@@ -28,7 +28,7 @@ int main()
 
     PlotDataSet set2(xAxis2, yAxis2, sf::Color::Cyan, "Cyan Data", PlottingType::BARS);
 
-    SFPlot plot(sf::Vector2f(800, 0), sf::Vector2f(800, 800), 50, &font);
+    SFPlot plot(sf::Vector2f(800, 0), sf::Vector2f(800, 800), 60, &font, "X Axis", "Y Axis");
     plot.AddDataSet(&set);
     plot.AddDataSet(&set2);
     //x-minimum, x-maximum, y-minimum, y-maximum, x-step-size, y-step-size, Color of axes

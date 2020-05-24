@@ -62,7 +62,7 @@ Available plotting types are POINTS, LINE and BARS
 Create your plot and add your dataset
 ```c++
 //Position, dimension, margin, font
-SFPlot plot(sf::Vector2f(800, 0), sf::Vector2f(800, 800), 50, &font);
+SFPlot plot(sf::Vector2f(800, 0), sf::Vector2f(800, 800), 50, &font, "X Axis", "Y Axis");
 plot.AddDataSet(&set);
 ```
 

@@ -42,6 +42,14 @@ namespace csrc
         PlotDataSet();
 
         /**
+         * Constructor for empty data, but initializing other properties
+         * @param color dataset color
+         * @param label dataset label
+         * @param type dataset type
+         */
+        PlotDataSet(sf::Color color, std::string label, PlottingType type);
+
+        /**
          * Dataset constructor
          * @param xValues vector of doubles, representing x axis
          * @param yValues vector of doubles, representing y axis

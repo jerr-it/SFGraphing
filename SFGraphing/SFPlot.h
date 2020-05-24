@@ -30,6 +30,9 @@ namespace csrc
 
         sf::Font* _font;
 
+        std::string _xAxisLabel;
+        std::string _yAxisLabel;
+
         sf::Color _axesColor;
         sf::Vector2f _xCoordBounds;
         sf::Vector2f _yCoordBounds;
@@ -72,8 +75,11 @@ namespace csrc
          * @param dimension width and height of plot
          * @param margin    distance of axes from the borders of the plot
          * @param font      sf::Font reference
+         * @param xLabel    label of x-axis
+         * @param yLabel    label of y-axis
          */
-        SFPlot(sf::Vector2f position, sf::Vector2f dimension, float margin, sf::Font* font);
+        SFPlot(sf::Vector2f position, sf::Vector2f dimension, float margin, sf::Font* font, std::string xLabel,
+               std::string yLabel);
 
         /**
          * Function for automatically deducing axes labeling
