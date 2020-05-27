@@ -35,7 +35,7 @@ PlotDataSet::PlotDataSet(std::vector<float> xValues, std::vector<float> yValues,
 
 sf::Vector2f PlotDataSet::GetDataValue(int i)
 {
-    return (sf::Vector2f) {_xValues[i], _yValues[i]};
+    return sf::Vector2f{_xValues[i], _yValues[i]};
 }
 
 void PlotDataSet::SetDataValue(int i, sf::Vector2f valuePair)
