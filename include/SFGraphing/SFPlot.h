@@ -1,3 +1,4 @@
+#pragma once
 /**
  * @file Plot file
  *
@@ -6,10 +7,6 @@
  *
  * @license MIT-License
  */
-
-#ifndef SFGRAPHING_SFPLOT_H
-#define SFGRAPHING_SFPLOT_H
-
 #include "PlotDataSet.h"
 #include <algorithm>
 #include <cmath>
@@ -26,9 +23,9 @@ private:
 
     float _margin;
 
-    std::vector<PlotDataSet*> _plotDataSets;
+    std::vector<PlotDataSet> _plotDataSets;
 
-    sf::Font* _font;
+    sf::Font _font;
 
     std::string _xAxisLabel;
     std::string _yAxisLabel;
@@ -57,7 +54,7 @@ private:
      * @param  loc The position to convert
      * @return              Converted Position
      */
-    sf::Vector2f CoordToWindowPosition(sf::Vector2f loc);
+    sf::Vector2f CoordToWindowPosition(const sf::Vector2f& loc);
 
 public:
 
@@ -67,7 +64,7 @@ public:
      * @param  precision number of digits after comma
      * @return           String representation
      */
-    std::string ToString(double d, int precision);
+    std::string ToString(const double& d, const size_t& precision = 2);
 
     /**
      * Constructor using essential values
@@ -78,8 +75,8 @@ public:
      * @param xLabel    label of x-axis
      * @param yLabel    label of y-axis
      */
-    SFPlot(sf::Vector2f position, sf::Vector2f dimension, float margin, sf::Font* font, std::string xLabel,
-           std::string yLabel);
+    SFPlot(const sf::Vector2f& position, const sf::Vector2f& dimension, const float& margin, const sf::Font& font, const std::string& xLabel,
+           const std::string& yLabel);
 
     /**
      * Function for automatically deducing axes labeling
@@ -96,13 +93,13 @@ public:
      * @param ystep     y step size
      * @param axesColor color of axes
      */
-    void SetupAxes(float xmin, float xmax, float ymin, float ymax, float xstep, float ystep, sf::Color axesColor);
+    void SetupAxes(const float& xmin, const float& xmax, const float& ymin, const float& ymax, const float& xstep, const float& ystep, const sf::Color& axesColor);
 
     /**
      * Function for adding a dataset to the plot
      * @param set the set to be added
      */
-    void AddDataSet(PlotDataSet* set);
+    void AddDataSet(const PlotDataSet& data_set);
 
     /**
      * Generate SFML VertexArrays from Datasets
@@ -115,5 +112,3 @@ public:
     void ClearVertices();
 };
 }
-
-#endif //SFGRAPHING_SFPLOT_H

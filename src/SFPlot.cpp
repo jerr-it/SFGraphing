@@ -6,22 +6,24 @@ void SFPlot::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(_axesVertexArray, states);
     target.draw(_axesIndicatorVertexArray, states);
-    for (int i = 0; i < _dataSetsVertexArrays.size(); i++) {
+    for (size_t i = 0; i < _dataSetsVertexArrays.size(); i++)
+    {
         target.draw(_dataSetsVertexArrays[i], states);
     }
-    for (int i = 0; i < _textElementArray.size(); i++) {
+    for (size_t i = 0; i < _textElementArray.size(); i++)
+    {
         target.draw(_textElementArray[i], states);
     }
 }
 
-sf::Vector2f SFPlot::CoordToWindowPosition(sf::Vector2f coords)
+sf::Vector2f SFPlot::CoordToWindowPosition(const sf::Vector2f& coords)
 {
     sf::Vector2f windowPosition;
 
-    float xAxisLength = _dimension.x - 2 * _margin;
+    float xAxisLength = _dimension.x - 2.f * _margin;
     float xAxisMax = _xCoordBounds.y;
 
-    float yAxisLength = _dimension.y - 2 * _margin;
+    float yAxisLength = _dimension.y - 2.f * _margin;
     float yAxisMax = _yCoordBounds.y;
 
     windowPosition.x = _origin.x + (_margin + xAxisLength * (coords.x / xAxisMax));
@@ -30,7 +32,7 @@ sf::Vector2f SFPlot::CoordToWindowPosition(sf::Vector2f coords)
     return windowPosition;
 }
 
-std::string SFPlot::ToString(double d, int precision)
+std::string SFPlot::ToString(const double& d, const size_t& precision)
 {
     std::stringstream stream;
     stream << std::fixed << std::setprecision(precision) << d;
@@ -38,15 +40,10 @@ std::string SFPlot::ToString(double d, int precision)
     return s;
 }
 
-SFPlot::SFPlot(sf::Vector2f position, sf::Vector2f dimension, float margin, sf::Font* font, std::string xLabel,
-               std::string yLabel)
+SFPlot::SFPlot(const sf::Vector2f& position, const sf::Vector2f& dimension, const float& margin, const sf::Font& font, const std::string& xLabel,
+               const std::string& yLabel)
+    : _origin(position), _dimension(dimension), _margin(margin), _font(font), _xAxisLabel(xLabel), _yAxisLabel(yLabel)
 {
-    _origin = position;
-    _dimension = dimension;
-    _margin = margin;
-    _font = font;
-    _xAxisLabel = xLabel;
-    _yAxisLabel = yLabel;
 }
 
 void SFPlot::SetupAxes()
@@ -55,17 +52,20 @@ void SFPlot::SetupAxes()
     float xmin = INFINITY;
     float ymin = INFINITY;
 
-    for (auto &dataset : _plotDataSets) {
-        std::vector<float> setXAxis = dataset->GetXValues();
-        std::vector<float> setYAxis = dataset->GetYValues();
+    for (const auto& dataset : _plotDataSets)
+    {
+        std::vector<float> setXAxis = dataset.GetXValues();
+        std::vector<float> setYAxis = dataset.GetYValues();
 
         float setMinX = *std::min_element(setXAxis.begin(), setXAxis.end());
         float setMinY = *std::min_element(setYAxis.begin(), setYAxis.end());
 
-        if (setMinX < xmin) {
+        if (setMinX < xmin)
+        {
             xmin = setMinX;
         }
-        if (setMinY < ymin) {
+        if (setMinY < ymin)
+        {
             ymin = setMinY;
         }
     }
@@ -73,17 +73,20 @@ void SFPlot::SetupAxes()
     float xmax = -INFINITY;
     float ymax = -INFINITY;
 
-    for (auto &dataset : _plotDataSets) {
-        std::vector<float> setXAxis = dataset->GetXValues();
-        std::vector<float> setYAxis = dataset->GetYValues();
+    for (const auto& dataset : _plotDataSets)
+    {
+        std::vector<float> setXAxis = dataset.GetXValues();
+        std::vector<float> setYAxis = dataset.GetYValues();
 
         float setMaxX = *std::max_element(setXAxis.begin(), setXAxis.end());
         float setMaxY = *std::max_element(setYAxis.begin(), setYAxis.end());
 
-        if (setMaxX > xmax) {
+        if (setMaxX > xmax)
+        {
             xmax = setMaxX;
         }
-        if (setMaxY > ymax) {
+        if (setMaxY > ymax)
+        {
             ymax = setMaxY;
         }
     }
@@ -100,7 +103,7 @@ void SFPlot::SetupAxes()
     _axesColor = sf::Color::White;
 }
 
-void SFPlot::SetupAxes(float xmin, float xmax, float ymin, float ymax, float xstep, float ystep, sf::Color axesColor)
+void SFPlot::SetupAxes(const float& xmin, const float& xmax, const float& ymin, const float& ymax, const float& xstep, const float& ystep, const sf::Color& axesColor)
 {
     _xCoordBounds.x = xmin;
     _xCoordBounds.y = xmax;
@@ -114,13 +117,15 @@ void SFPlot::SetupAxes(float xmin, float xmax, float ymin, float ymax, float xst
     _axesColor = axesColor;
 }
 
-void SFPlot::AddDataSet(PlotDataSet* set)
+void SFPlot::AddDataSet(const PlotDataSet& data_set)
 {
-    _plotDataSets.push_back(set);
+    _plotDataSets.push_back(data_set);
 }
 
 void SFPlot::GenerateVertices()
 {
+    this->ClearVertices();
+
     /*
      * Calculating axes themselves
      */
@@ -136,7 +141,7 @@ void SFPlot::GenerateVertices()
      * Axis Labels
      */
     sf::Text xaxislabel;
-    xaxislabel.setFont(*_font);
+    xaxislabel.setFont(_font);
     xaxislabel.setCharacterSize(_margin * 0.35);
     xaxislabel.setFillColor(_axesColor);
     xaxislabel.setString(_xAxisLabel);
@@ -149,7 +154,7 @@ void SFPlot::GenerateVertices()
 
     //------
     sf::Text yaxislabel;
-    yaxislabel.setFont(*_font);
+    yaxislabel.setFont(_font);
     yaxislabel.setCharacterSize(_margin * 0.35);
     yaxislabel.setFillColor(_axesColor);
     yaxislabel.setString(_yAxisLabel);
@@ -163,7 +168,8 @@ void SFPlot::GenerateVertices()
      */
     _axesIndicatorVertexArray.setPrimitiveType(sf::PrimitiveType::Lines);
     //x axis
-    for (float x = _xCoordBounds.x; x <= _xCoordBounds.y; x += _CoordSteps.x) {
+    for (float x = _xCoordBounds.x; x <= _xCoordBounds.y; x += _CoordSteps.x)
+    {
         //indicator
         sf::Vector2f windowPosition = CoordToWindowPosition(sf::Vector2f(x, 0));
 
@@ -174,7 +180,7 @@ void SFPlot::GenerateVertices()
         //text
         sf::Text indicatorText;
         indicatorText.setCharacterSize(_margin * 0.35);
-        indicatorText.setFont(*_font);
+        indicatorText.setFont(_font);
         indicatorText.setString(ToString(x, 2));
         indicatorText.setFillColor(_axesColor);
 
@@ -187,7 +193,8 @@ void SFPlot::GenerateVertices()
     }
 
     //y axis
-    for (float y = _yCoordBounds.x; y <= _yCoordBounds.y; y += _CoordSteps.y) {
+    for (float y = _yCoordBounds.x; y <= _yCoordBounds.y; y += _CoordSteps.y)
+    {
         //indicator
         sf::Vector2f windowPosition = CoordToWindowPosition(sf::Vector2f(0, y));
 
@@ -198,7 +205,7 @@ void SFPlot::GenerateVertices()
         //text
         sf::Text indicatorText;
         indicatorText.setCharacterSize(_margin * 0.35);
-        indicatorText.setFont(*_font);
+        indicatorText.setFont(_font);
         indicatorText.setString(ToString(y, 2));
         indicatorText.setFillColor(_axesColor);
 
@@ -214,14 +221,15 @@ void SFPlot::GenerateVertices()
      */
 
     sf::Vector2f legendPos = sf::Vector2f(_origin + sf::Vector2f(_dimension.x - 5, 0));
-    for (auto &dataset : _plotDataSets) {
+    for (const auto& dataset : _plotDataSets)
+    {
         //Generate legend
         sf::Text segmentLegend;
         segmentLegend.setPosition(legendPos);
-        segmentLegend.setFont(*_font);
+        segmentLegend.setFont(_font);
         segmentLegend.setCharacterSize(_margin * 0.6);
-        segmentLegend.setString(dataset->GetLabel());
-        segmentLegend.setFillColor(dataset->GetColor());
+        segmentLegend.setString(dataset.GetLabel());
+        segmentLegend.setFillColor(dataset.GetColor());
 
         sf::FloatRect dim = segmentLegend.getLocalBounds();
         segmentLegend.move(-dim.width, 0);
@@ -232,35 +240,43 @@ void SFPlot::GenerateVertices()
 
         //Generate actual data lines
         sf::VertexArray graph;
-        PlottingType type = dataset->GetPlottingType();
+        PlottingType type = dataset.GetPlottingType();
 
-        sf::Color col = dataset->GetColor();
+        sf::Color col = dataset.GetColor();
 
-        if (type == PlottingType::POINTS) {
+        if (type == PlottingType::POINTS)
+        {
             graph.setPrimitiveType(sf::PrimitiveType::Quads);
 
-            for (int i = 0; i < dataset->GetDataLength(); i++) {
-                sf::Vector2f windowPosition = CoordToWindowPosition(dataset->GetDataValue(i));
+            for (size_t i = 0; i < dataset.GetDataLength(); i++)
+            {
+                sf::Vector2f windowPosition = CoordToWindowPosition(dataset.GetDataValue(i));
 
                 graph.append(sf::Vertex(sf::Vector2f(windowPosition.x - 2, windowPosition.y - 2), col));
                 graph.append(sf::Vertex(sf::Vector2f(windowPosition.x + 2, windowPosition.y - 2), col));
                 graph.append(sf::Vertex(sf::Vector2f(windowPosition.x + 2, windowPosition.y + 2), col));
                 graph.append(sf::Vertex(sf::Vector2f(windowPosition.x - 2, windowPosition.y + 2), col));
             }
-        } else if (type == PlottingType::LINE) {
+        }
+        else if (type == PlottingType::LINE)
+        {
             graph.setPrimitiveType(sf::PrimitiveType::LinesStrip);
 
-            for (int i = 0; i < dataset->GetDataLength(); i++) {
-                sf::Vector2f windowPosition = CoordToWindowPosition(dataset->GetDataValue(i));
+            for (size_t i = 0; i < dataset.GetDataLength(); i++)
+            {
+                sf::Vector2f windowPosition = CoordToWindowPosition(dataset.GetDataValue(i));
 
                 graph.append(sf::Vertex(windowPosition, col));
             }
-        } else if (type == PlottingType::BARS) {
+        }
+        else if (type == PlottingType::BARS)
+        {
             graph.setPrimitiveType(sf::PrimitiveType::Quads);
 
-            for (int i = 0; i < dataset->GetDataLength(); i++) {
+            for (size_t i = 0; i < dataset.GetDataLength(); i++)
+            {
                 //Generate bars
-                sf::Vector2f dataValue = dataset->GetDataValue(i);
+                sf::Vector2f dataValue = dataset.GetDataValue(i);
                 sf::Vector2f windowPosition = CoordToWindowPosition(dataValue);
                 sf::Vector2f zeroWindowPosition = CoordToWindowPosition(sf::Vector2f(dataValue.x, 0));
 
@@ -270,7 +286,9 @@ void SFPlot::GenerateVertices()
                 graph.append(sf::Vertex(sf::Vector2f(zeroWindowPosition.x + 2, zeroWindowPosition.y), col));
                 graph.append(sf::Vertex(sf::Vector2f(zeroWindowPosition.x - 2, zeroWindowPosition.y), col));
             }
-        } else {
+        }
+        else
+        {
             //Should never happen
             exit(1);
         }

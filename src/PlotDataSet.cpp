@@ -25,64 +25,75 @@ PlotDataSet::PlotDataSet(const std::vector<float>& xValues, const std::vector<fl
     }
 }
 
-sf::Vector2f PlotDataSet::GetDataValue(int i)
+sf::Vector2f PlotDataSet::GetDataValue(const size_t& i) const
 {
     return sf::Vector2f{_xValues[i], _yValues[i]};
 }
 
-void PlotDataSet::SetDataValue(int i, sf::Vector2f valuePair)
+void PlotDataSet::SetDataValue(const size_t& i, const sf::Vector2f& valuePair)
 {
     _xValues[i] = valuePair.x;
     _yValues[i] = valuePair.y;
 }
 
-sf::Color PlotDataSet::GetColor()
+sf::Color PlotDataSet::GetColor() const
 {
     return _color;
 }
 
-void PlotDataSet::SetColor(sf::Color color)
+void PlotDataSet::SetColor(const sf::Color& color)
 {
     _color = color;
 }
 
-std::string PlotDataSet::GetLabel()
+std::string PlotDataSet::GetLabel() const
 {
     return _label;
 }
 
-void PlotDataSet::SetLabel(std::string label)
+void PlotDataSet::SetLabel(const std::string& label)
 {
     _label = label;
 }
 
-PlottingType PlotDataSet::GetPlottingType()
+PlottingType PlotDataSet::GetPlottingType() const
 {
     return _pType;
 }
 
-void PlotDataSet::SetPlottingType(PlottingType type)
+void PlotDataSet::SetPlottingType(const PlottingType& type)
 {
     _pType = type;
 }
 
-int PlotDataSet::GetDataLength()
+size_t PlotDataSet::GetDataLength() const
 {
     return _xValues.size();
 }
 
-std::vector<float> PlotDataSet::GetXValues()
+std::vector<float> PlotDataSet::GetXValues() const
 {
     return _xValues;
 }
 
-std::vector<float> PlotDataSet::GetYValues()
+std::vector<float> PlotDataSet::GetYValues() const
 {
     return _yValues;
 }
 
-void PlotDataSet::PushPair(sf::Vector2f pair)
+void PlotDataSet::PushPair(const sf::Vector2f& pair)
 {
     _xValues.push_back(pair.x);
     _yValues.push_back(pair.y);
+}
+
+void PlotDataSet::PopFront(const size_t n)
+{
+    size_t erase_count = std::min(n - 1, _xValues.size());
+
+    if (erase_count != 0)
+    {
+        _xValues.erase(_xValues.begin(), _xValues.begin() + erase_count);
+        _yValues.erase(_yValues.begin(), _xValues.begin() + erase_count);
+    }
 }

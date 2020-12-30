@@ -72,7 +72,7 @@ void SFPieChart::GenerateVertices()
          * Pie Legend
          */
         sf::Text text;
-        text.setFont(_font);
+        text.setFont(*_font);
         std::string label;
         if (_dataset.GetRepresentation() == Representation::ABSOLUTE)
         {

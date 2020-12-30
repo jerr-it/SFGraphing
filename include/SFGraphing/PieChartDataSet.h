@@ -1,3 +1,4 @@
+#pragma once
 /**
  * @file Piechart data file
  *
@@ -6,16 +7,13 @@
  *
  * @license MIT-License
  */
-
-#ifndef GRAPHING_PIECHARTDATASET_H
-#define GRAPHING_PIECHARTDATASET_H
-
 #include "SFML/Graphics.hpp"
 #include <iostream>
 
 namespace csrc
 {
-enum Representation {
+enum class Representation
+{
     RELATIVE,
     ABSOLUTE
 };
@@ -42,49 +40,47 @@ public:
      * @param representation relative/absolute
      * @param colors         colors of segments
      */
-    PieChartDataSet(std::vector<float> values, std::vector<std::string> labels, Representation representation,
-                    std::vector<sf::Color> colors);
+    PieChartDataSet(const std::vector<float>& values, const std::vector<std::string>& labels, const Representation& representation,
+                    const std::vector<sf::Color>& colors);
 
     /**
      * Get Segment Count
      * @return segment count
      */
-    int GetLength();
+    size_t GetLength() const;
 
     /**
      * Get size of specific segment
      * @param  i index
      * @return   segment i
      */
-    float GetValue(int i);
+    float GetValue(const size_t& i) const;
 
     /**
      * Get label of segment i
      * @param  i index
      * @return   label of segment i
      */
-    std::string GetLabel(int i);
+    std::string GetLabel(const size_t& i) const;
 
     /**
      * Get color of segment i
      * @param  i index
      * @return   color of segment i
      */
-    sf::Color GetColor(int i);
+    sf::Color GetColor(const size_t& i) const;
 
     /**
      * Get piechart representation
      * @return _representation
      */
-    Representation GetRepresentation();
+    Representation GetRepresentation() const;
 
     /**
      * Set a segments value
      * @param i     index
      * @param value new value
      */
-    void SetValue(int i, float value);
+    void SetValue(const size_t& i, const float& value);
 };
 }
-
-#endif //GRAPHING_PIECHARTDATASET_H

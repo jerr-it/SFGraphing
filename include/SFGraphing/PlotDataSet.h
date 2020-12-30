@@ -1,3 +1,4 @@
+#pragma once
 /**
  * @file Plot data file
  *
@@ -6,10 +7,6 @@
  *
  * @license MIT-License
  */
-
-
-#ifndef SFGRAPHING_PLOTDATASET_H
-#define SFGRAPHING_PLOTDATASET_H
 
 #include <vector>
 #include <string>
@@ -64,76 +61,80 @@ public:
      * _xValues Getter
      * @return _xValues
      */
-    std::vector<float> GetXValues();
+    std::vector<float> GetXValues() const;
 
     /**
      * _yValues Getter
      * @return _yValues
      */
-    std::vector<float> GetYValues();
+    std::vector<float> GetYValues() const;
 
     /**
      * Get element count (_xValues ad _yValues always the same size)
      * @return _xValues.size()
      */
-    int GetDataLength();
+    size_t GetDataLength() const;
 
     /**
      * Get a specific value
      * @param  i index
      * @return   value pair at i
      */
-    sf::Vector2f GetDataValue(int i);
+    sf::Vector2f GetDataValue(const size_t& i) const;
 
     /**
      * Setter for a certain value, by index
      * @param i         index
      * @param valuePair new x and y values
      */
-    void SetDataValue(int i, sf::Vector2f valuePair);
+    void SetDataValue(const size_t& i, const sf::Vector2f& valuePair);
 
     /**
      * _color Getter
      * @return _color
      */
-    sf::Color GetColor();
+    sf::Color GetColor() const;
 
     /**
      * _color Setter
      * @param color _color
      */
-    void SetColor(sf::Color color);
+    void SetColor(const sf::Color& color);
 
     /**
      * _label Getter
      * @return _label
      */
-    std::string GetLabel();
+    std::string GetLabel() const;
 
     /**
      * _label Setter
      * @param lab new _label
      */
-    void SetLabel(std::string lab);
+    void SetLabel(const std::string& lab);
 
     /**
      * _plotType Getter
      * @return _plotType
      */
-    PlottingType GetPlottingType();
+    PlottingType GetPlottingType() const;
 
     /**
      * _plotType Setter
      * @param type new _plotType
      */
-    void SetPlottingType(PlottingType type);
+    void SetPlottingType(const PlottingType& type);
 
     /**
      * Function for adding a pair of values to the dataset
      * @param pair the pair to be added
      */
-    void PushPair(sf::Vector2f pair);
+    void PushPair(const sf::Vector2f& pair);
+
+    /**
+     * Function for erasing a pair of values to the dataset
+     * @param number of elements to erase
+     */
+    void PopFront(const size_t n = 1);
 };
 }
-
-#endif //SFGRAPHING_PLOTDATASET_H

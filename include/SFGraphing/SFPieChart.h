@@ -1,3 +1,4 @@
+#pragma once
 /**
  * @file Piechart file
  *
@@ -6,10 +7,6 @@
  *
  * @license MIT-License
  */
-
-#ifndef GRAPHING_SFPIECHART_H
-#define GRAPHING_SFPIECHART_H
-
 #include "PieChartDataSet.h"
 #include <cmath>
 #include <iomanip>
@@ -20,8 +17,8 @@ namespace csrc
 class SFPieChart : public sf::Drawable
 {
 private:
-    sf::Font* _font;
-    PieChartDataSet* _dataset;
+    sf::Font _font;
+    PieChartDataSet _dataset;
 
     sf::Vector2f _position;
     float _radius;
@@ -45,7 +42,7 @@ public:
      * @param radius   radius of piechart
      * @param font     sf::Font reference
      */
-    SFPieChart(PieChartDataSet* dataset, sf::Vector2f position, float radius, sf::Font* font);
+    SFPieChart(const PieChartDataSet& dataset, const sf::Vector2f& position, const float& radius, const sf::Font& font);
 
     /**
      * Creates a string representation of a double with 'precision' number of digits after comma
@@ -53,7 +50,7 @@ public:
      * @param  precision number of digits after comma
      * @return           String representation
      */
-    std::string ToString(double d, int precision);
+    std::string ToString(const double& d, const size_t& precision = 2);
 
     /**
      * Function for generating SFML VertexArrays
@@ -66,5 +63,3 @@ public:
     void ClearVertices();
 };
 }
-
-#endif //GRAPHING_SFPIECHART_H

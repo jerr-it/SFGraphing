@@ -3,50 +3,47 @@
 using namespace csrc;
 
 PieChartDataSet::PieChartDataSet()
+    : _representation(Representation::ABSOLUTE)
 {
-    _representation = Representation::ABSOLUTE;
 }
 
-PieChartDataSet::PieChartDataSet(std::vector<float> values, std::vector<std::string> labels,
-                                 Representation representation, std::vector<sf::Color> color)
+PieChartDataSet::PieChartDataSet(const std::vector<float>& values, const std::vector<std::string>& labels,
+                                 const Representation& representation, const std::vector<sf::Color>& color)
+    : _values(values), _labels(labels), _representation(representation), _colors(color)
 {
-    if (values.size() != color.size()) {
+    if (values.size() != color.size())
+    {
         std::cerr << "Invalid data set input" << std::endl;
         exit(1);
     }
-
-    _values = values;
-    _labels = labels;
-    _representation = representation;
-    _colors = color;
 }
 
-float PieChartDataSet::GetValue(int i)
+float PieChartDataSet::GetValue(const size_t& i) const
 {
     return _values[i];
 }
 
-sf::Color PieChartDataSet::GetColor(int i)
+sf::Color PieChartDataSet::GetColor(const size_t& i) const
 {
     return _colors[i];
 }
 
-int PieChartDataSet::GetLength()
+size_t PieChartDataSet::GetLength() const
 {
     return _values.size();
 }
 
-std::string PieChartDataSet::GetLabel(int i)
+std::string PieChartDataSet::GetLabel(const size_t& i) const
 {
     return _labels[i];
 }
 
-Representation PieChartDataSet::GetRepresentation()
+Representation PieChartDataSet::GetRepresentation() const
 {
     return _representation;
 }
 
-void PieChartDataSet::SetValue(int i, float value)
+void PieChartDataSet::SetValue(const size_t& i, const float& value)
 {
     _values[i] = value;
 }
