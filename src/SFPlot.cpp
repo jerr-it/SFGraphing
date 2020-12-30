@@ -1,4 +1,4 @@
-#include "SFPlot.h"
+#include "SFGraphing/SFPlot.h"
 
 using namespace csrc;
 
@@ -6,12 +6,10 @@ void SFPlot::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(_axesVertexArray, states);
     target.draw(_axesIndicatorVertexArray, states);
-    for (int i = 0; i < _dataSetsVertexArrays.size(); i++)
-    {
+    for (int i = 0; i < _dataSetsVertexArrays.size(); i++) {
         target.draw(_dataSetsVertexArrays[i], states);
     }
-    for (int i = 0; i < _textElementArray.size(); i++)
-    {
+    for (int i = 0; i < _textElementArray.size(); i++) {
         target.draw(_textElementArray[i], states);
     }
 }
@@ -57,20 +55,17 @@ void SFPlot::SetupAxes()
     float xmin = INFINITY;
     float ymin = INFINITY;
 
-    for (auto &dataset : _plotDataSets)
-    {
+    for (auto &dataset : _plotDataSets) {
         std::vector<float> setXAxis = dataset->GetXValues();
         std::vector<float> setYAxis = dataset->GetYValues();
 
         float setMinX = *std::min_element(setXAxis.begin(), setXAxis.end());
         float setMinY = *std::min_element(setYAxis.begin(), setYAxis.end());
 
-        if (setMinX < xmin)
-        {
+        if (setMinX < xmin) {
             xmin = setMinX;
         }
-        if (setMinY < ymin)
-        {
+        if (setMinY < ymin) {
             ymin = setMinY;
         }
     }
@@ -78,20 +73,17 @@ void SFPlot::SetupAxes()
     float xmax = -INFINITY;
     float ymax = -INFINITY;
 
-    for (auto &dataset : _plotDataSets)
-    {
+    for (auto &dataset : _plotDataSets) {
         std::vector<float> setXAxis = dataset->GetXValues();
         std::vector<float> setYAxis = dataset->GetYValues();
 
         float setMaxX = *std::max_element(setXAxis.begin(), setXAxis.end());
         float setMaxY = *std::max_element(setYAxis.begin(), setYAxis.end());
 
-        if (setMaxX > xmax)
-        {
+        if (setMaxX > xmax) {
             xmax = setMaxX;
         }
-        if (setMaxY > ymax)
-        {
+        if (setMaxY > ymax) {
             ymax = setMaxY;
         }
     }
@@ -171,14 +163,13 @@ void SFPlot::GenerateVertices()
      */
     _axesIndicatorVertexArray.setPrimitiveType(sf::PrimitiveType::Lines);
     //x axis
-    for (float x = _xCoordBounds.x; x <= _xCoordBounds.y; x += _CoordSteps.x)
-    {
+    for (float x = _xCoordBounds.x; x <= _xCoordBounds.y; x += _CoordSteps.x) {
         //indicator
         sf::Vector2f windowPosition = CoordToWindowPosition(sf::Vector2f(x, 0));
 
         _axesIndicatorVertexArray.append(sf::Vertex(windowPosition, _axesColor));
         _axesIndicatorVertexArray.append(
-                sf::Vertex(sf::Vector2f(windowPosition.x, windowPosition.y + (_margin * 0.25)), _axesColor));
+            sf::Vertex(sf::Vector2f(windowPosition.x, windowPosition.y + (_margin * 0.25)), _axesColor));
 
         //text
         sf::Text indicatorText;
@@ -196,14 +187,13 @@ void SFPlot::GenerateVertices()
     }
 
     //y axis
-    for (float y = _yCoordBounds.x; y <= _yCoordBounds.y; y += _CoordSteps.y)
-    {
+    for (float y = _yCoordBounds.x; y <= _yCoordBounds.y; y += _CoordSteps.y) {
         //indicator
         sf::Vector2f windowPosition = CoordToWindowPosition(sf::Vector2f(0, y));
 
         _axesIndicatorVertexArray.append(sf::Vertex(windowPosition, _axesColor));
         _axesIndicatorVertexArray.append(
-                sf::Vertex(sf::Vector2f(windowPosition.x - (_margin * 0.25), windowPosition.y), _axesColor));
+            sf::Vertex(sf::Vector2f(windowPosition.x - (_margin * 0.25), windowPosition.y), _axesColor));
 
         //text
         sf::Text indicatorText;
@@ -224,8 +214,7 @@ void SFPlot::GenerateVertices()
      */
 
     sf::Vector2f legendPos = sf::Vector2f(_origin + sf::Vector2f(_dimension.x - 5, 0));
-    for (auto &dataset : _plotDataSets)
-    {
+    for (auto &dataset : _plotDataSets) {
         //Generate legend
         sf::Text segmentLegend;
         segmentLegend.setPosition(legendPos);
@@ -247,12 +236,10 @@ void SFPlot::GenerateVertices()
 
         sf::Color col = dataset->GetColor();
 
-        if (type == PlottingType::POINTS)
-        {
+        if (type == PlottingType::POINTS) {
             graph.setPrimitiveType(sf::PrimitiveType::Quads);
 
-            for (int i = 0; i < dataset->GetDataLength(); i++)
-            {
+            for (int i = 0; i < dataset->GetDataLength(); i++) {
                 sf::Vector2f windowPosition = CoordToWindowPosition(dataset->GetDataValue(i));
 
                 graph.append(sf::Vertex(sf::Vector2f(windowPosition.x - 2, windowPosition.y - 2), col));
@@ -260,22 +247,18 @@ void SFPlot::GenerateVertices()
                 graph.append(sf::Vertex(sf::Vector2f(windowPosition.x + 2, windowPosition.y + 2), col));
                 graph.append(sf::Vertex(sf::Vector2f(windowPosition.x - 2, windowPosition.y + 2), col));
             }
-        } else if (type == PlottingType::LINE)
-        {
+        } else if (type == PlottingType::LINE) {
             graph.setPrimitiveType(sf::PrimitiveType::LinesStrip);
 
-            for (int i = 0; i < dataset->GetDataLength(); i++)
-            {
+            for (int i = 0; i < dataset->GetDataLength(); i++) {
                 sf::Vector2f windowPosition = CoordToWindowPosition(dataset->GetDataValue(i));
 
                 graph.append(sf::Vertex(windowPosition, col));
             }
-        } else if (type == PlottingType::BARS)
-        {
+        } else if (type == PlottingType::BARS) {
             graph.setPrimitiveType(sf::PrimitiveType::Quads);
 
-            for (int i = 0; i < dataset->GetDataLength(); i++)
-            {
+            for (int i = 0; i < dataset->GetDataLength(); i++) {
                 //Generate bars
                 sf::Vector2f dataValue = dataset->GetDataValue(i);
                 sf::Vector2f windowPosition = CoordToWindowPosition(dataValue);
@@ -287,8 +270,7 @@ void SFPlot::GenerateVertices()
                 graph.append(sf::Vertex(sf::Vector2f(zeroWindowPosition.x + 2, zeroWindowPosition.y), col));
                 graph.append(sf::Vertex(sf::Vector2f(zeroWindowPosition.x - 2, zeroWindowPosition.y), col));
             }
-        } else
-        {
+        } else {
             //Should never happen
             exit(1);
         }

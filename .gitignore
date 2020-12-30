@@ -1,0 +1,17 @@
+# Ignore CMake temporary files
+CMakeCache.txt
+CMakeFiles/*
+Makefile
+cmake_install.cmake
+
+# Ignore build output
+graphing
+*.a
+
+# ignore vscode files
+build/*
+.vscode/*
+
+# ignore astyle -A8 output files
+*.orig
+

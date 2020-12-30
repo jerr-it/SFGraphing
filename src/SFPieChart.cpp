@@ -1,16 +1,14 @@
-#include "SFPieChart.h"
+#include "SFGraphing/SFPieChart.h"
 
 using namespace csrc;
 
 void SFPieChart::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    for (int i = 0; i < _pieSegments.size(); i++)
-    {
+    for (int i = 0; i < _pieSegments.size(); i++) {
         target.draw(_pieSegments[i], states);
     }
 
-    for (int i = 0; i < _textElements.size(); i++)
-    {
+    for (int i = 0; i < _textElements.size(); i++) {
         target.draw(_textElements[i], states);
     }
 }
@@ -34,8 +32,7 @@ std::string SFPieChart::ToString(double d, int precision)
 void SFPieChart::GenerateVertices()
 {
     float totalSegmentsValue = 0;
-    for (int i = 0; i < _dataset->GetLength(); i++)
-    {
+    for (int i = 0; i < _dataset->GetLength(); i++) {
         totalSegmentsValue += _dataset->GetValue(i);
     }
 
@@ -46,8 +43,7 @@ void SFPieChart::GenerateVertices()
     sf::Vector2f legendBasePosition = sf::Vector2f(_position.x + _radius + 10, _position.y);
     legendBasePosition.y -= (_dataset->GetLength() / 2) * charSize;
 
-    for (int i = 0; i < _dataset->GetLength(); i++)
-    {
+    for (int i = 0; i < _dataset->GetLength(); i++) {
         /*
          * Pie Segment
          */
@@ -59,8 +55,7 @@ void SFPieChart::GenerateVertices()
 
         float segmentAngle = (_dataset->GetValue(i) / totalSegmentsValue) * 2 * M_PI;
 
-        for (float theta = segmentBaseAngle; theta < segmentBaseAngle + segmentAngle + angleStep; theta += angleStep)
-        {
+        for (float theta = segmentBaseAngle; theta < segmentBaseAngle + segmentAngle + angleStep; theta += angleStep) {
             float xPos = _position.x + _radius * cos(theta);
             float yPos = _position.y + _radius * sin(theta);
 
@@ -76,11 +71,9 @@ void SFPieChart::GenerateVertices()
         sf::Text text;
         text.setFont(*_font);
         std::string label;
-        if (_dataset->GetRepresentation() == Representation::ABSOLUTE)
-        {
+        if (_dataset->GetRepresentation() == Representation::ABSOLUTE) {
             label = ToString(_dataset->GetValue(i), 2) + " - " + _dataset->GetLabel(i);
-        } else
-        {
+        } else {
             label = ToString(_dataset->GetValue(i) / totalSegmentsValue, 3) + " - " + _dataset->GetLabel(i);
         }
         text.setString(label);

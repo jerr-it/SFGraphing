@@ -1,4 +1,4 @@
-#include "PieChartDataSet.h"
+#include "SFGraphing/PieChartDataSet.h"
 
 using namespace csrc;
 
@@ -10,8 +10,7 @@ PieChartDataSet::PieChartDataSet()
 PieChartDataSet::PieChartDataSet(std::vector<float> values, std::vector<std::string> labels,
                                  Representation representation, std::vector<sf::Color> color)
 {
-    if (values.size() != color.size())
-    {
+    if (values.size() != color.size()) {
         std::cerr << "Invalid data set input" << std::endl;
         exit(1);
     }

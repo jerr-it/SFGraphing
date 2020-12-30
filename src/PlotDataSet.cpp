@@ -1,4 +1,4 @@
-#include "PlotDataSet.h"
+#include "SFGraphing/PlotDataSet.h"
 
 using namespace csrc;
 
@@ -19,8 +19,7 @@ PlotDataSet::PlotDataSet(sf::Color color, std::string label, PlottingType type)
 PlotDataSet::PlotDataSet(std::vector<float> xValues, std::vector<float> yValues, sf::Color color, std::string label,
                          PlottingType type)
 {
-    if (xValues.size() != yValues.size())
-    {
+    if (xValues.size() != yValues.size()) {
         std::cerr << "Incompatible data sizes" << std::endl;
         exit(1);
     }

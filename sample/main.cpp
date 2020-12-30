@@ -46,13 +46,10 @@ int main()
     SFPieChart pChart(&pSet, sf::Vector2f(250, 400), 200, &font);
     pChart.GenerateVertices();
 
-    while (window.isOpen())
-    {
+    while (window.isOpen()) {
         sf::Event event;
-        if (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-            {
+        if (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
                 window.close();
             }
         }
@@ -85,8 +82,7 @@ int main()
          * ----------------------------------
          */
 
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
-        {
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
             sf::Vector2u wSize = window.getSize();
             sf::Texture texture;
             texture.create(wSize.x, wSize.y);
