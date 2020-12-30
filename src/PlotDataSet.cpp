@@ -9,27 +9,20 @@ PlotDataSet::PlotDataSet()
     _pType = PlottingType::POINTS;
 }
 
-PlotDataSet::PlotDataSet(sf::Color color, std::string label, PlottingType type)
+PlotDataSet::PlotDataSet(const sf::Color& color, const std::string& label, const PlottingType& type)
+    : _color(color), _label(label), _pType(type)
 {
-    _color = color;
-    _label = label;
-    _pType = type;
 }
 
-PlotDataSet::PlotDataSet(std::vector<float> xValues, std::vector<float> yValues, sf::Color color, std::string label,
-                         PlottingType type)
+PlotDataSet::PlotDataSet(const std::vector<float>& xValues, const std::vector<float>& yValues, const sf::Color& color, const std::string& label,
+                         const PlottingType& type)
+    : _xValues(xValues), _yValues(yValues), _color(color), _label(label), _pType(type)
 {
-    if (xValues.size() != yValues.size()) {
+    if (_xValues.size() != _yValues.size())
+    {
         std::cerr << "Incompatible data sizes" << std::endl;
         exit(1);
     }
-
-    _xValues = xValues;
-    _yValues = yValues;
-
-    _color = color;
-    _label = label;
-    _pType = type;
 }
 
 sf::Vector2f PlotDataSet::GetDataValue(int i)

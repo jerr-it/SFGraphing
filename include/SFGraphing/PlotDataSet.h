@@ -19,7 +19,8 @@
 
 namespace csrc
 {
-enum PlottingType {
+enum PlottingType
+{
     POINTS,
     LINE,
     BARS
@@ -46,7 +47,7 @@ public:
      * @param label dataset label
      * @param type dataset type
      */
-    PlotDataSet(sf::Color color, std::string label, PlottingType type);
+    PlotDataSet(const sf::Color& color, const std::string& label, const PlottingType& type);
 
     /**
      * Dataset constructor
@@ -56,8 +57,8 @@ public:
      * @param label   data label
      * @param type    bars/points/line
      */
-    PlotDataSet(std::vector<float> xValues, std::vector<float> yValues, sf::Color color, std::string label,
-                PlottingType type);
+    PlotDataSet(const std::vector<float>& xValues, const std::vector<float>& yValues, const sf::Color& color, const std::string& label,
+                const PlottingType& type);
 
     /**
      * _xValues Getter
