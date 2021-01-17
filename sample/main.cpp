@@ -21,19 +21,13 @@ int main()
     std::vector<float> xAxis = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     std::vector<float> yAxis = {1, 2, 3, 4, 5, 6, 5, 6, 7, 8};
 
-    PlotDataSet set(xAxis, yAxis, sf::Color::Green, "Green Data", PlottingType::LINE);
+    PlotDataSet set1(xAxis, yAxis, sf::Color::Green, "Green Data", PlottingType::LINE);
 
     std::vector<float> xAxis2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     std::vector<float> yAxis2 = {1, 1, 1, 2, 4, 6, 6, 8, 9, 10};
 
     PlotDataSet set2(xAxis2, yAxis2, sf::Color::Cyan, "Cyan Data", PlottingType::BARS);
 
-    SFPlot plot(sf::Vector2f(800, 0), sf::Vector2f(800, 800), 60, &font, "X Axis", "Y Axis");
-    plot.AddDataSet(&set);
-    plot.AddDataSet(&set2);
-    //x-minimum, x-maximum, y-minimum, y-maximum, x-step-size, y-step-size, Color of axes
-    plot.SetupAxes(0, 10, 0, 10, 1, 1, sf::Color::White);
-    plot.GenerateVertices();
 
     /*
      * Pie Chart
@@ -43,11 +37,18 @@ int main()
     std::vector<std::string> labels = {"A", "B", "C", "D"};
     PieChartDataSet pSet(values, labels, Representation::RELATIVE, colors);
 
-    SFPieChart pChart(&pSet, sf::Vector2f(250, 400), 200, &font);
-    pChart.GenerateVertices();
-
     while (window.isOpen())
     {
+        SFPlot plot(sf::Vector2f(800, 0), sf::Vector2f(800, 800), 60, font, "X Axis", "Y Axis");
+        plot.AddDataSet(set1);
+        plot.AddDataSet(set2);
+        //x-minimum, x-maximum, y-minimum, y-maximum, x-step-size, y-step-size, Color of axes
+        plot.SetupAxes(0, 10, 0, 10, 1, 1, sf::Color::White);
+        plot.GenerateVertices();
+
+        SFPieChart pChart(pSet, sf::Vector2f(250, 400), 200, font);
+        pChart.GenerateVertices();
+
         sf::Event event;
         if (window.pollEvent(event))
         {
@@ -64,7 +65,7 @@ int main()
          */
         plot.ClearVertices();
 
-        set.SetDataValue(0, set.GetDataValue(0) + sf::Vector2f(0, 0.001));
+        set1.SetDataValue(0, set1.GetDataValue(0) + sf::Vector2f(0, 0.001));
 
         //Calling without parameters makes the Plot auto-deduce the size of the plot
         plot.SetupAxes();
