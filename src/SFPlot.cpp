@@ -125,6 +125,7 @@ void SFPlot::AddDataSet(const PlotDataSet& data_set)
 void SFPlot::GenerateVertices()
 {
     this->ClearVertices();
+    const auto characterSize = static_cast<unsigned int>(_margin * 0.35);
 
     /*
      * Calculating axes themselves
@@ -142,11 +143,11 @@ void SFPlot::GenerateVertices()
      */
     sf::Text xaxislabel;
     xaxislabel.setFont(_font);
-    xaxislabel.setCharacterSize(_margin * 0.35);
+    xaxislabel.setCharacterSize(characterSize);
     xaxislabel.setFillColor(_axesColor);
     xaxislabel.setString(_xAxisLabel);
 
-    xaxislabel.setPosition(CoordToWindowPosition(sf::Vector2f(_xCoordBounds.y, 0)) + sf::Vector2f(_margin * 0.3, 0));
+    xaxislabel.setPosition(CoordToWindowPosition(sf::Vector2f(_xCoordBounds.y, 0)) + sf::Vector2f(_margin * 0.3f, 0));
 
     xaxislabel.rotate(-90);
 
@@ -155,7 +156,7 @@ void SFPlot::GenerateVertices()
     //------
     sf::Text yaxislabel;
     yaxislabel.setFont(_font);
-    yaxislabel.setCharacterSize(_margin * 0.35);
+    yaxislabel.setCharacterSize(characterSize);
     yaxislabel.setFillColor(_axesColor);
     yaxislabel.setString(_yAxisLabel);
 
@@ -175,11 +176,11 @@ void SFPlot::GenerateVertices()
 
         _axesIndicatorVertexArray.append(sf::Vertex(windowPosition, _axesColor));
         _axesIndicatorVertexArray.append(
-            sf::Vertex(sf::Vector2f(windowPosition.x, windowPosition.y + (_margin * 0.25)), _axesColor));
+            sf::Vertex(sf::Vector2f(windowPosition.x, windowPosition.y + (_margin * 0.25f)), _axesColor));
 
         //text
         sf::Text indicatorText;
-        indicatorText.setCharacterSize(_margin * 0.35);
+        indicatorText.setCharacterSize(characterSize);
         indicatorText.setFont(_font);
         indicatorText.setString(ToString(x, 2));
         indicatorText.setFillColor(_axesColor);
@@ -187,7 +188,7 @@ void SFPlot::GenerateVertices()
         sf::FloatRect tDimension = indicatorText.getLocalBounds();
         indicatorText.setOrigin(tDimension.left + tDimension.width / 2, tDimension.top + tDimension.height / 2);
 
-        indicatorText.setPosition(windowPosition.x, windowPosition.y + (_margin * 0.5));
+        indicatorText.setPosition(windowPosition.x, windowPosition.y + (_margin * 0.5f));
 
         _textElementArray.push_back(indicatorText);
     }
@@ -200,16 +201,16 @@ void SFPlot::GenerateVertices()
 
         _axesIndicatorVertexArray.append(sf::Vertex(windowPosition, _axesColor));
         _axesIndicatorVertexArray.append(
-            sf::Vertex(sf::Vector2f(windowPosition.x - (_margin * 0.25), windowPosition.y), _axesColor));
+            sf::Vertex(sf::Vector2f(windowPosition.x - (_margin * 0.25f), windowPosition.y), _axesColor));
 
         //text
         sf::Text indicatorText;
-        indicatorText.setCharacterSize(_margin * 0.35);
+        indicatorText.setCharacterSize(characterSize);
         indicatorText.setFont(_font);
         indicatorText.setString(ToString(y, 2));
         indicatorText.setFillColor(_axesColor);
 
-        indicatorText.setPosition(windowPosition.x - (_margin * 0.25), windowPosition.y - 5);
+        indicatorText.setPosition(windowPosition.x - (_margin * 0.25f), windowPosition.y - 5);
         sf::FloatRect tDimension = indicatorText.getLocalBounds();
         indicatorText.move(-tDimension.width - 2, -tDimension.height / 2);
 
@@ -227,7 +228,7 @@ void SFPlot::GenerateVertices()
         sf::Text segmentLegend;
         segmentLegend.setPosition(legendPos);
         segmentLegend.setFont(_font);
-        segmentLegend.setCharacterSize(_margin * 0.6);
+        segmentLegend.setCharacterSize(static_cast<unsigned int>(_margin * 0.6));
         segmentLegend.setString(dataset.GetLabel());
         segmentLegend.setFillColor(dataset.GetColor());
 
