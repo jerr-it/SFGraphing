@@ -37,10 +37,10 @@ void SFPieChart::GenerateVertices()
         totalSegmentsValue += _dataset.GetValue(i);
     }
 
-    float segmentBaseAngle = -M_PI / 2;
-    float angleStep = 2 * M_PI / 360;
+    float segmentBaseAngle = static_cast<float>(-M_PI / 2);
+    float angleStep = static_cast<float>(2 * M_PI / 360);
 
-    float charSize = _radius * 0.15;
+    float charSize = _radius * 0.15f;
     sf::Vector2f legendBasePosition = sf::Vector2f(_position.x + _radius + 10, _position.y);
     legendBasePosition.y -= (_dataset.GetLength() / 2) * charSize;
 
@@ -55,7 +55,7 @@ void SFPieChart::GenerateVertices()
         //Middle point
         segment.append(sf::Vertex(_position, _dataset.GetColor(i)));
 
-        float segmentAngle = (_dataset.GetValue(i) / totalSegmentsValue) * 2 * M_PI;
+        float segmentAngle = (_dataset.GetValue(i) / totalSegmentsValue) * static_cast<float>(2 * M_PI);
 
         for (float theta = segmentBaseAngle; theta < segmentBaseAngle + segmentAngle + angleStep; theta += angleStep)
         {
@@ -86,10 +86,10 @@ void SFPieChart::GenerateVertices()
 
         text.setFillColor(_dataset.GetColor(i));
         text.setPosition(legendBasePosition);
-        text.setCharacterSize(charSize);
+        text.setCharacterSize(static_cast<unsigned int>(charSize));
 
         sf::FloatRect fr = text.getLocalBounds();
-        text.move(0, i * fr.height * 1.2);
+        text.move(0, i * fr.height * 1.2f);
 
         _textElements.push_back(text);
     }
