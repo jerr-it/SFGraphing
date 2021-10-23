@@ -89,11 +89,11 @@ void PlotDataSet::PushPair(const sf::Vector2f& pair)
 
 void PlotDataSet::PopFront(const size_t n)
 {
-    size_t erase_count = std::min(n - 1, _xValues.size());
+    size_t erase_count = std::min(n, _xValues.size());
 
     if (erase_count != 0)
     {
         _xValues.erase(_xValues.begin(), _xValues.begin() + erase_count);
-        _yValues.erase(_yValues.begin(), _xValues.begin() + erase_count);
+        _yValues.erase(_yValues.begin(), _yValues.begin() + erase_count);
     }
 }
