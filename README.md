@@ -25,7 +25,7 @@ You can now set Position and Dimension of Plots
 
 <h2 align="center">How to use</h2>
 
-Documentation at: https://cherrysrc.github.io/SFGraphing/<br>
+Documentation at: https://jerr-it.github.io/SFGraphing/<br>
 
 The file main.cpp provides more details on how to use this library
 
