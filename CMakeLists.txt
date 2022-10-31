@@ -3,7 +3,7 @@ project(graphing)
 
 ###################################################################
 # Option Setting
-option(ENABLE_SAMPLE "build sample program.(Default:OFF)" OFF)
+option(ENABLE_SAMPLE "build sample program.(Default:ON)" ON)
 
 ###################################################################
 # import SFML library

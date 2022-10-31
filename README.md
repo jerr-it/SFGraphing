@@ -29,6 +29,8 @@ Documentation at: https://cherrysrc.github.io/SFGraphing/<br>
 
 The file main.cpp provides more details on how to use this library
 
+By default a sample program will be created.
+
 How to compile this example <br>
 ```
 cmake .
