@@ -10,6 +10,7 @@
 #include "PlotDataSet.h"
 #include <algorithm>
 #include <cmath>
+#include <functional>
 #include <iomanip>
 #include <sstream>
 
@@ -23,7 +24,7 @@ private:
 
     float _margin;
 
-    std::vector<PlotDataSet> _plotDataSets;
+    std::vector<std::reference_wrapper<const PlotDataSet>> _plotDataSets;
 
     sf::Font _font;
 

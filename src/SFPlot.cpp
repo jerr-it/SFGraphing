@@ -52,7 +52,7 @@ void SFPlot::SetupAxes()
     float xmin = INFINITY;
     float ymin = INFINITY;
 
-    for (const auto& dataset : _plotDataSets)
+    for (const PlotDataSet& dataset : _plotDataSets)
     {
         std::vector<float> setXAxis = dataset.GetXValues();
         std::vector<float> setYAxis = dataset.GetYValues();
@@ -73,7 +73,7 @@ void SFPlot::SetupAxes()
     float xmax = -INFINITY;
     float ymax = -INFINITY;
 
-    for (const auto& dataset : _plotDataSets)
+    for (const PlotDataSet& dataset : _plotDataSets)
     {
         std::vector<float> setXAxis = dataset.GetXValues();
         std::vector<float> setYAxis = dataset.GetYValues();
@@ -119,7 +119,7 @@ void SFPlot::SetupAxes(const float& xmin, const float& xmax, const float& ymin, 
 
 void SFPlot::AddDataSet(const PlotDataSet& data_set)
 {
-    _plotDataSets.push_back(data_set);
+    _plotDataSets.push_back(std::ref(data_set));
 }
 
 void SFPlot::GenerateVertices()
@@ -222,7 +222,7 @@ void SFPlot::GenerateVertices()
      */
 
     sf::Vector2f legendPos = sf::Vector2f(_origin + sf::Vector2f(_dimension.x - 5, 0));
-    for (const auto& dataset : _plotDataSets)
+    for (const PlotDataSet& dataset : _plotDataSets)
     {
         //Generate legend
         sf::Text segmentLegend;
